@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function ShopPage() {
   return (
-    <div className="pt-0 min-h-screen">
+    <div className="min-h-screen pt-16 sm:pt-18 md:pt-20">
       <Suspense fallback={<ShopLoading />}>
         <ShopContent />
       </Suspense>

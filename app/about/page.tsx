@@ -19,7 +19,7 @@ const stats = [
 
 export default function AboutPage() {
   return (
-    <div className="pt-20 md:pt-24">
+    <div className="pt-16 sm:pt-18 md:pt-20">
       {/* HERO */}
       <section className="relative py-24 md:py-36 overflow-hidden">
         <div

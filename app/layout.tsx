@@ -100,7 +100,7 @@ export default function RootLayout({
         <ThemeProvider>
           <CartProvider>
             <Header />
-            <main className="min-h-screen mt-20 sm:mt-24 md:mt-32">{children}</main>
+            <main className="min-h-screen mt-0">{children}</main>
             <Footer />
             <WhatsAppButton />
           </CartProvider>

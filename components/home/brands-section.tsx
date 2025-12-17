@@ -45,10 +45,10 @@ export function BrandsSection() {
   )
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-background to-secondary/10">
+    <section className="py-14 md:py-20 lg:py-28 bg-gradient-to-b from-background to-secondary/10">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2 md:mb-4">
+        <div className="text-center mb-10 md:mb-14">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 md:mb-4">
             Brands We Deal With
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -57,15 +57,15 @@ export function BrandsSection() {
           </p>
         </div>
 
-        <div className="mb-10 md:mb-14">
-          <div className="flex items-center justify-center gap-2 mb-4">
+        <div className="mb-12 md:mb-16">
+          <div className="flex justify-center gap-2 mb-5">
             <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Main Brand Partner</span>
             <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
           </div>
-          <Card className="max-w-md mx-auto p-6 md:p-8 bg-gradient-to-br from-primary/5 via-white to-yellow-50 dark:from-primary/10 dark:via-secondary/30 dark:to-yellow-900/10 border-2 border-primary/30 shadow-xl hover:shadow-2xl transition-all duration-300">
+          <Card className="max-w-md mx-auto p-7 md:p-9 bg-gradient-to-br from-primary/5 via-white to-yellow-50 dark:from-primary/10 dark:via-secondary/30 dark:to-yellow-900/10 border-2 border-primary/30 shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="text-center">
-              <div className="relative w-48 h-32 md:w-64 md:h-40 mx-auto mb-4">
+              <div className="relative w-56 h-36 md:w-72 md:h-48 mx-auto mb-5">
                 <Image
                   src="/images/brands/linich-official.jpg"
                   alt="LINICH - Main Brand Partner"
@@ -74,16 +74,16 @@ export function BrandsSection() {
                   unoptimized
                 />
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">LINICH</h3>
-              <p className="text-sm md:text-base text-muted-foreground">
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3">LINICH</h3>
+              <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                 Official Main Brand Partner of Hexamech. Premium automotive tools and equipment trusted by professionals
                 across Kerala.
               </p>
-              <div className="mt-4 flex items-center justify-center gap-2">
-                <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
+              <div className="mt-5 flex items-center justify-center gap-3">
+                <span className="px-4 py-2 bg-primary/10 text-primary text-xs font-semibold rounded-full">
                   Exclusive Partner
                 </span>
-                <span className="px-3 py-1 bg-yellow-500/10 text-yellow-600 text-xs font-semibold rounded-full">
+                <span className="px-4 py-2 bg-yellow-500/10 text-yellow-600 text-xs font-semibold rounded-full">
                   Premium Quality
                 </span>
               </div>
@@ -91,35 +91,33 @@ export function BrandsSection() {
           </Card>
         </div>
 
-        {/* Other Brands Section */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-7">
           <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Other Trusted Brands</p>
         </div>
 
-        <div className="relative px-12 md:px-16">
-          {/* Left Navigation Button */}
+        <div className="relative px-14 md:px-20">
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-background shadow-lg z-10 hover:bg-primary hover:text-white transition-colors"
+            className="absolute left-1 top-1/2 -translate-y-1/2 bg-background shadow-lg z-10 hover:bg-primary hover:text-white transition-colors h-10 w-10"
             onClick={prevRow}
             aria-label="Previous brands"
           >
             <ChevronLeft className="h-5 w-5" />
           </Button>
 
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 md:gap-4">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 md:gap-5">
             {visibleBrands.map((brand, index) => (
               <Card
                 key={index}
-                className="aspect-square flex items-center justify-center p-3 md:p-4 bg-white/50 dark:bg-secondary/30 border-primary/20 hover:border-primary/50 hover:bg-white/70 dark:hover:bg-secondary/50 transition-all duration-300 hover:shadow-lg"
+                className="aspect-square flex items-center justify-center p-4 md:p-5 bg-white/60 dark:bg-secondary/40 border-primary/20 hover:border-primary/60 hover:bg-white/80 dark:hover:bg-secondary/60 transition-all duration-300 hover:shadow-xl"
               >
                 <div className="w-full h-full relative flex items-center justify-center overflow-hidden">
                   <Image
                     src={brand.logo || "/placeholder.svg"}
                     alt={brand.name}
                     fill
-                    className="object-contain p-3 scale-110"
+                    className="object-contain p-2.5 md:p-3 scale-140 hover:scale-155 transition-transform duration-300"
                     unoptimized
                   />
                 </div>
@@ -127,11 +125,10 @@ export function BrandsSection() {
             ))}
           </div>
 
-          {/* Right Navigation Button */}
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-background shadow-lg z-10 hover:bg-primary hover:text-white transition-colors"
+            className="absolute right-1 top-1/2 -translate-y-1/2 bg-background shadow-lg z-10 hover:bg-primary hover:text-white transition-colors h-10 w-10"
             onClick={nextRow}
             aria-label="Next brands"
           >
@@ -139,8 +136,7 @@ export function BrandsSection() {
           </Button>
         </div>
 
-        {/* Dot Navigation - shows which row is active */}
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="flex justify-center gap-2 mt-10">
           {Array.from({ length: Math.ceil(brands.length / brandsPerRow) }).map((_, rowIndex) => (
             <button
               key={rowIndex}

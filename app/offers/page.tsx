@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function OffersPage() {
   return (
-    <div className="pt-20 md:pt-24">
+    <div className="min-h-screen pt-16 sm:pt-18 md:pt-20">
       <OffersContent />
     </div>
   )

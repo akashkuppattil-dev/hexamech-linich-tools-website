@@ -75,7 +75,7 @@ const whyContactUs = [
 
 export default function ContactPage() {
   return (
-    <div className="pt-24 sm:pt-28 md:pt-32">
+    <div className="pt-16 sm:pt-18 md:pt-20">
       {/* Hero Section - Improved mobile */}
       <section className="py-10 sm:py-16 md:py-24 bg-gradient-to-br from-secondary/50 via-background to-primary/5 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -98,15 +98,15 @@ export default function ContactPage() {
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-6 text-xs sm:text-sm">
             <span className="flex items-center justify-center gap-2">
-              <CheckCircle className="h-4 w-4 text-primary" />
+              <CheckCircle className="h-4 w-4 sm:h-6 sm:w-6 text-primary" />
               <strong>4,000+</strong> Happy Workshops
             </span>
             <span className="flex items-center justify-center gap-2">
-              <CheckCircle className="h-4 w-4 text-primary" />
+              <CheckCircle className="h-4 w-4 sm:h-6 sm:w-6 text-primary" />
               <strong>30 min</strong> Response Time
             </span>
             <span className="flex items-center justify-center gap-2">
-              <CheckCircle className="h-4 w-4 text-primary" />
+              <CheckCircle className="h-4 w-4 sm:h-6 sm:w-6 text-primary" />
               <strong>GST</strong> Verified Business
             </span>
           </div>

@@ -26,7 +26,6 @@ export function ShopContent() {
   const [currentPage, setCurrentPage] = useState(1)
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
-  // Apply URL params on mount
   useEffect(() => {
     const category = searchParams.get("category")
     const search = searchParams.get("search")
@@ -39,11 +38,9 @@ export function ShopContent() {
     }
   }, [searchParams])
 
-  // Filter products
   const filteredProducts = useMemo(() => {
     let filtered = [...products]
 
-    // Search filter
     const searchQuery = searchParams.get("search")?.toLowerCase()
     if (searchQuery) {
       filtered = filtered.filter(
@@ -54,20 +51,16 @@ export function ShopContent() {
       )
     }
 
-    // Category filter
     if (selectedCategories.length > 0) {
       filtered = filtered.filter((p) => selectedCategories.includes(p.category))
     }
 
-    // Brand filter
     if (selectedBrands.length > 0) {
       filtered = filtered.filter((p) => selectedBrands.includes(p.brand))
     }
 
-    // Price filter
     filtered = filtered.filter((p) => p.price >= priceRange[0] && p.price <= priceRange[1])
 
-    // Availability filter
     if (availability.length > 0) {
       if (availability.includes("in-stock") && !availability.includes("out-of-stock")) {
         filtered = filtered.filter((p) => p.inStock)
@@ -79,7 +72,6 @@ export function ShopContent() {
       }
     }
 
-    // Sorting
     switch (sortBy) {
       case "price-low":
         filtered.sort((a, b) => a.price - b.price)
@@ -93,14 +85,12 @@ export function ShopContent() {
       case "rating":
       case "popularity":
       default:
-        // Keep original order (assumed by popularity)
         break
     }
 
     return filtered
   }, [selectedCategories, selectedBrands, priceRange, availability, sortBy, searchParams])
 
-  // Pagination
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE)
   const paginatedProducts = filteredProducts.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE)
 
@@ -168,7 +158,6 @@ export function ShopContent() {
       </div>
 
       <div className="flex gap-8">
-        {/* Desktop Filters Sidebar */}
         <aside className="hidden lg:block w-64 shrink-0">
           <ShopFilters
             categories={categories}
@@ -186,11 +175,8 @@ export function ShopContent() {
           />
         </aside>
 
-        {/* Main Content */}
         <div className="flex-1">
-          {/* Toolbar */}
           <div className="flex flex-wrap items-center justify-between gap-4 mb-6 p-4 bg-secondary/30 rounded-xl">
-            {/* Mobile Filters Button */}
             <Sheet open={mobileFiltersOpen} onOpenChange={setMobileFiltersOpen}>
               <SheetTrigger asChild>
                 <Button variant="outline" className="lg:hidden bg-transparent">
@@ -221,14 +207,11 @@ export function ShopContent() {
               </SheetContent>
             </Sheet>
 
-            {/* Results Count */}
             <p className="text-sm text-muted-foreground">
               Showing {paginatedProducts.length} of {filteredProducts.length} products
             </p>
 
-            {/* Sort & Grid Controls */}
             <div className="flex items-center gap-3">
-              {/* Sort */}
               <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortOption)}>
                 <SelectTrigger className="w-40">
                   <SelectValue placeholder="Sort by" />
@@ -242,7 +225,6 @@ export function ShopContent() {
                 </SelectContent>
               </Select>
 
-              {/* Grid Toggle */}
               <div className="hidden md:flex items-center border border-border rounded-lg">
                 <Button
                   variant={gridCols === 3 ? "secondary" : "ghost"}
@@ -264,7 +246,6 @@ export function ShopContent() {
             </div>
           </div>
 
-          {/* Active Filters Tags */}
           {activeFiltersCount > 0 && (
             <div className="flex flex-wrap gap-2 mb-6">
               {selectedCategories.map((cat) => (
@@ -301,7 +282,6 @@ export function ShopContent() {
             </div>
           )}
 
-          {/* Product Grid */}
           {paginatedProducts.length > 0 ? (
             <div
               className={`grid gap-4 md:gap-6 ${
@@ -325,7 +305,6 @@ export function ShopContent() {
             </div>
           )}
 
-          {/* Pagination */}
           {totalPages > 1 && (
             <div className="flex items-center justify-center gap-2 mt-8">
               <Button
@@ -370,7 +349,6 @@ export function ShopContent() {
             </div>
           )}
 
-          {/* Load More Button */}
           {currentPage < totalPages && (
             <div className="text-center mt-6">
               <Button variant="outline" size="lg" onClick={() => setCurrentPage((p) => p + 1)} className="px-8">

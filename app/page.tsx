@@ -13,7 +13,7 @@ import { InstagramStrip } from "@/components/home/instagram-strip"
 
 export default function HomePage() {
   return (
-    <div className="pt-0">
+    <div className="pt-16 sm:pt-18 md:pt-20">
       <HeroSection />
       <TrustBand />
       <TopProductsCarousel />

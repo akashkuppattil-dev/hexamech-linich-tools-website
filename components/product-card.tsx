@@ -55,7 +55,6 @@ export function ProductCard({ product }: ProductCardProps) {
             console.log("Share cancelled")
           }
         } else {
-          // Fallback to copy link
           navigator.clipboard.writeText(productUrl)
           alert("Link copied to clipboard!")
         }
@@ -80,14 +79,14 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/product/${product.id}`}>
       <Card className="group relative overflow-hidden glass hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full flex flex-col cursor-pointer">
-        <div className="absolute top-2 sm:top-3 left-2 sm:left-3 z-10 flex flex-col gap-1">
+        <div className="absolute top-1.5 sm:top-2.5 left-1.5 sm:left-2.5 z-10 flex flex-col gap-0.5 sm:gap-1">
           {product.isOffer && product.offerBadge && (
             <Badge className="bg-accent text-accent-foreground text-xs">{product.offerBadge}</Badge>
           )}
         </div>
 
-        {/* Quick Actions - Added Web Share API for native sharing */}
-        <div className="absolute top-2 sm:top-3 right-2 sm:right-3 z-10 flex flex-col gap-1 sm:gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+        {/* Quick Actions - improved mobile responsiveness with better sizing */}
+        <div className="absolute top-1.5 sm:top-2.5 right-1.5 sm:right-2.5 z-10 flex flex-col gap-0.5 sm:gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
           <Button
             size="icon"
             variant={inWishlist ? "default" : "secondary"}
@@ -110,7 +109,7 @@ export function ProductCard({ product }: ProductCardProps) {
               <Share2 className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
             {showShareMenu && (
-              <div className="absolute right-0 top-10 bg-background border rounded-lg shadow-lg z-20 min-w-max">
+              <div className="absolute right-0 top-9 sm:top-10 bg-background border rounded-lg shadow-lg z-20 min-w-max text-sm">
                 {shareOptions.map((option) => (
                   <button
                     key={option.name}
@@ -124,7 +123,7 @@ export function ProductCard({ product }: ProductCardProps) {
                       }
                       setShowShareMenu(false)
                     }}
-                    className="block w-full text-left px-4 py-2 hover:bg-secondary text-sm"
+                    className="block w-full text-left px-3 py-2 hover:bg-secondary text-xs sm:text-sm"
                   >
                     {option.icon} {option.name}
                   </button>
@@ -140,27 +139,31 @@ export function ProductCard({ product }: ProductCardProps) {
             src={product.image || "/placeholder.svg"}
             alt={product.name}
             fill
-            className="object-contain p-3 sm:p-4 group-hover:scale-105 transition-transform duration-300"
+            className="object-contain p-2.5 sm:p-3 md:p-4 group-hover:scale-105 transition-transform duration-300"
+            onError={(e) => {
+              e.currentTarget.src = "/placeholder.svg"
+            }}
+            priority={false}
           />
         </div>
 
-        <CardContent className="p-3 sm:p-4 flex-grow flex flex-col">
-          {/* Brand - increased font size */}
-          <p className="text-xs sm:text-sm text-muted-foreground mb-1">{product.brand}</p>
+        <CardContent className="p-2.5 sm:p-3 md:p-4 flex-grow flex flex-col">
+          {/* Brand */}
+          <p className="text-xs text-muted-foreground mb-0.5 sm:mb-1">{product.brand}</p>
 
-          {/* Name - increased font size */}
-          <h3 className="font-semibold text-base sm:text-lg text-foreground line-clamp-2 mb-1 sm:mb-2 min-h-[2rem] sm:min-h-[2.5rem]">
+          {/* Name */}
+          <h3 className="font-semibold text-xs sm:text-sm md:text-base text-foreground line-clamp-2 mb-0.5 sm:mb-1 min-h-[1.5rem] sm:min-h-[2rem]">
             {product.name}
           </h3>
 
-          {/* SKU & Category - increased font size */}
-          <p className="text-xs sm:text-sm text-muted-foreground mb-1">{product.category}</p>
-          <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3">SKU: {product.sku}</p>
+          {/* SKU & Category */}
+          <p className="text-xs text-muted-foreground mb-0.5">{product.category}</p>
+          <p className="text-xs text-muted-foreground mb-1.5 sm:mb-2">SKU: {product.sku}</p>
 
-          {/* Key Features & Specs - increased font size */}
-          <div className="mb-3 sm:mb-4 flex-grow">
-            <p className="text-xs sm:text-sm font-semibold text-foreground mb-1">Specifications:</p>
-            <ul className="text-xs sm:text-sm text-muted-foreground space-y-0.5">
+          {/* Key Features & Specs */}
+          <div className="mb-2 sm:mb-3 flex-grow">
+            <p className="text-xs font-semibold text-foreground mb-0.5">Specs:</p>
+            <ul className="text-xs text-muted-foreground space-y-0.5">
               {Object.entries(product.specs)
                 .slice(0, 3)
                 .map(([key, value]) => (
@@ -172,22 +175,22 @@ export function ProductCard({ product }: ProductCardProps) {
             </ul>
           </div>
 
-          <div className="space-y-2 mt-auto">
-            <div className="flex gap-2 w-full overflow-hidden">
+          <div className="space-y-1.5 mt-auto">
+            <div className="flex gap-1 w-full overflow-hidden">
               <Button
                 variant="outline"
-                className="flex-1 h-8 sm:h-9 text-xs px-2 border-primary/30 bg-primary/5 hover:bg-primary/10 font-medium whitespace-nowrap"
+                className="flex-1 h-7 sm:h-8 text-xs px-1.5 border-primary/30 bg-primary/5 hover:bg-primary/10 font-medium whitespace-nowrap"
                 disabled
                 onClick={(e) => {
                   e.preventDefault()
                   e.stopPropagation()
                 }}
               >
-                <Lock className="h-3 w-3 mr-1 shrink-0" />
-                Request
+                <Lock className="h-2.5 w-2.5 mr-0.5 shrink-0" />
+                <span className="hidden sm:inline">Request</span>
               </Button>
               <Button
-                className="flex-1 h-8 sm:h-9 text-xs px-2 bg-[#25D366] hover:bg-[#128C7E] text-white whitespace-nowrap overflow-hidden"
+                className="flex-1 h-7 sm:h-8 text-xs px-1.5 bg-[#25D366] hover:bg-[#128C7E] text-white whitespace-nowrap overflow-hidden"
                 onClick={(e) => {
                   e.preventDefault()
                   e.stopPropagation()
@@ -197,7 +200,7 @@ export function ProductCard({ product }: ProductCardProps) {
                   )
                 }}
               >
-                <MessageCircle className="h-3 w-3 shrink-0" />
+                <MessageCircle className="h-2.5 w-2.5 shrink-0" />
                 <span className="hidden sm:inline ml-1">WhatsApp</span>
               </Button>
             </div>

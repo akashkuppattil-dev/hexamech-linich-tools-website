@@ -49,10 +49,10 @@ export function WhyHexamech() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-12 md:py-16 lg:py-24 bg-secondary/30">
+    <section ref={sectionRef} className="py-8 md:py-10 lg:py-12 bg-secondary/30">
       <div className="container mx-auto px-4">
         {/* Header - Better mobile typography */}
-        <div className="text-center mb-8 md:mb-12">
+        <div className="text-center mb-6 md:mb-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 md:mb-4">
             Why Choose Hexamech?
           </h2>

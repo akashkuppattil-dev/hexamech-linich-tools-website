@@ -40,7 +40,7 @@ export function Footer() {
           <div className="flex gap-3">
             <a
               href="tel:+917510638693"
-              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs sm:text-sm font-medium hover:opacity-90 transition"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs sm:text-sm font-semibold hover:opacity-90 transition"
             >
               <Phone className="h-4 w-4" />
               <span className="hidden xs:inline">Call Now</span>
@@ -50,7 +50,7 @@ export function Footer() {
               href="https://wa.me/917510638693?text=Hi%20Hexamech%2C%20I%27m%20interested%20in%20your%20products"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-[#25D366] text-white text-xs sm:text-sm font-medium hover:opacity-90 transition"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-[#25D366] text-white text-xs sm:text-sm font-semibold hover:opacity-90 transition"
             >
               <MessageCircle className="h-4 w-4" />
               WhatsApp
@@ -60,7 +60,7 @@ export function Footer() {
       </div>
 
       {/* MAIN FOOTER */}
-      <div className="container mx-auto px-4 py-8 sm:py-10 md:py-14">
+      <div className="container mx-auto px-4 py-8 sm:py-10 md:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* BRAND */}
           <div className="sm:col-span-2 lg:col-span-1">
@@ -124,7 +124,7 @@ export function Footer() {
 
           {/* QUICK LINKS */}
           <div>
-            <h3 className="font-semibold text-foreground mb-4">Company</h3>
+            <h3 className="font-semibold text-foreground mb-4 text-base">Company</h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.href}>
@@ -138,7 +138,7 @@ export function Footer() {
 
           {/* CONTACT */}
           <div>
-            <h3 className="font-semibold text-foreground mb-4">Contact</h3>
+            <h3 className="font-semibold text-foreground mb-4 text-base">Contact</h3>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="flex gap-3">
                 <MapPin className="h-5 w-5 text-primary shrink-0" />
@@ -147,7 +147,7 @@ export function Footer() {
 
               <li className="flex gap-3">
                 <Phone className="h-5 w-5 text-primary shrink-0" />
-                <a href="tel:+917510638693" className="hover:text-primary">
+                <a href="tel:+917510638693" className="hover:text-primary font-medium">
                   +91 75106 38693
                 </a>
               </li>
@@ -158,7 +158,7 @@ export function Footer() {
                   href="https://wa.me/917510638693?text=Hi%20Hexamech%2C%20I%27m%20interested%20in%20your%20products"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-primary"
+                  className="hover:text-primary font-medium"
                 >
                   WhatsApp Business
                 </a>
@@ -166,7 +166,7 @@ export function Footer() {
 
               <li className="flex gap-3">
                 <Mail className="h-5 w-5 text-primary shrink-0" />
-                <a href="mailto:hexamechlinichtools@gmail.com" className="hover:text-primary break-all">
+                <a href="mailto:hexamechlinichtools@gmail.com" className="hover:text-primary break-all font-medium">
                   hexamechlinichtools@gmail.com
                 </a>
               </li>
@@ -179,7 +179,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold text-foreground mb-4">Follow Us</h3>
+            <h3 className="font-semibold text-foreground mb-4 text-base">Follow Us</h3>
             <a
               href="https://instagram.com/hexamech_linich_tools"
               target="_blank"

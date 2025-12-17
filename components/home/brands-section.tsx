@@ -45,9 +45,9 @@ export function BrandsSection() {
   )
 
   return (
-    <section className="py-14 md:py-20 lg:py-28 bg-gradient-to-b from-background to-secondary/10">
+    <section className="py-8 md:py-10 lg:py-14 bg-gradient-to-b from-background to-secondary/10">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10 md:mb-14">
+        <div className="text-center mb-6 md:mb-8">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 md:mb-4">
             Brands We Deal With
           </h2>
@@ -63,9 +63,9 @@ export function BrandsSection() {
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Main Brand Partner</span>
             <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
           </div>
-          <Card className="max-w-md mx-auto p-7 md:p-9 bg-gradient-to-br from-primary/5 via-white to-yellow-50 dark:from-primary/10 dark:via-secondary/30 dark:to-yellow-900/10 border-2 border-primary/30 shadow-xl hover:shadow-2xl transition-all duration-300">
+          <Card className="max-w-4xl mx-auto p-6 md:p-8 bg-gradient-to-br from-primary/5 via-white to-yellow-50 dark:from-primary/10 dark:via-secondary/30 dark:to-yellow-900/10 border-2 border-primary/30 shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="text-center">
-              <div className="relative w-56 h-36 md:w-72 md:h-48 mx-auto mb-5">
+              <div className="relative w-80 h-28 md:w-full md:h-32 mx-auto mb-4">
                 <Image
                   src="/images/brands/linich-official.jpg"
                   alt="LINICH - Main Brand Partner"
@@ -74,16 +74,16 @@ export function BrandsSection() {
                   unoptimized
                 />
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3">LINICH</h3>
-              <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+              <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">LINICH</h3>
+              <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                 Official Main Brand Partner of Hexamech. Premium automotive tools and equipment trusted by professionals
                 across Kerala.
               </p>
-              <div className="mt-5 flex items-center justify-center gap-3">
-                <span className="px-4 py-2 bg-primary/10 text-primary text-xs font-semibold rounded-full">
+              <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
+                <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
                   Exclusive Partner
                 </span>
-                <span className="px-4 py-2 bg-yellow-500/10 text-yellow-600 text-xs font-semibold rounded-full">
+                <span className="px-3 py-1 bg-yellow-500/10 text-yellow-600 text-xs font-semibold rounded-full">
                   Premium Quality
                 </span>
               </div>
@@ -117,7 +117,7 @@ export function BrandsSection() {
                     src={brand.logo || "/placeholder.svg"}
                     alt={brand.name}
                     fill
-                    className="object-contain p-2.5 md:p-3 scale-140 hover:scale-155 transition-transform duration-300"
+                    className="object-contain p-2.5 md:p-3 scale-160 hover:scale-175 transition-transform duration-300"
                     unoptimized
                   />
                 </div>

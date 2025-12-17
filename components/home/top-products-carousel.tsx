@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -8,38 +8,30 @@ import { ProductCard } from "@/components/product-card"
 import { getTopProducts } from "@/lib/products"
 
 export function TopProductsCarousel() {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [canScrollLeft, setCanScrollLeft] = useState(false)
-  const [canScrollRight, setCanScrollRight] = useState(true)
+  const [currentIndex, setCurrentIndex] = useState(0)
   const topProducts = getTopProducts(10)
+  const itemsToShow = 4 // reduced from 6 to 4 items displayed
 
-  const checkScroll = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current
-      setCanScrollLeft(scrollLeft > 0)
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
-    }
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % topProducts.length)
   }
 
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const scrollAmount = 320
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      })
-      setTimeout(checkScroll, 300)
-    }
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + topProducts.length) % topProducts.length)
   }
 
-  const handleViewAllClick = () => {
-    window.scrollTo({ top: 0, behavior: "instant" })
+  const getVisibleItems = () => {
+    const items = []
+    for (let i = 0; i < itemsToShow; i++) {
+      items.push(topProducts[(currentIndex + i) % topProducts.length])
+    }
+    return items
   }
 
   return (
-    <section className="py-12 md:py-16 lg:py-24">
+    <section className="py-8 md:py-10 lg:py-14">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 md:mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-4 md:mb-6">
           <div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-1 md:mb-2">
               Best-Selling Automotive & Workshop Equipment
@@ -49,56 +41,64 @@ export function TopProductsCarousel() {
             </p>
           </div>
           <div className="flex items-center gap-3">
-            {/* View All Button - Added onClick handler */}
-            <Link href="/shop" onClick={handleViewAllClick}>
+            <Link href="/shop">
               <Button variant="outline" className="group bg-transparent">
                 View All Products
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            {/* Navigation Arrows - hidden on mobile */}
-            <div className="hidden md:flex gap-2">
-              <Button variant="outline" size="icon" onClick={() => scroll("left")} disabled={!canScrollLeft}>
-                <ChevronLeft className="h-5 w-5" />
-              </Button>
-              <Button variant="outline" size="icon" onClick={() => scroll("right")} disabled={!canScrollRight}>
-                <ChevronRight className="h-5 w-5" />
-              </Button>
-            </div>
           </div>
         </div>
 
-        {/* Carousel - Improved responsive sizing */}
         <div className="relative">
-          <div
-            ref={scrollRef}
-            className="flex gap-4 md:gap-6 overflow-x-auto scrollbar-hide pb-4 snap-x snap-mandatory"
-            onScroll={checkScroll}
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {topProducts.map((product) => (
-              <div
-                key={product.id}
-                className="min-w-[240px] max-w-[240px] sm:min-w-[260px] sm:max-w-[260px] md:min-w-[280px] md:max-w-[280px] snap-start"
-              >
-                <ProductCard product={product} />
-              </div>
+          {/* Navigation Buttons and Product Grid */}
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+            {/* Previous Button */}
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={goToPrev}
+              className="h-10 w-10 md:h-12 md:w-12 flex-shrink-0 bg-transparent"
+              aria-label="Previous products"
+            >
+              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
+            </Button>
+
+            <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 py-6">
+              {" "}
+              {/* changed lg:grid-cols-6 to lg:grid-cols-4 */}
+              {getVisibleItems().map((product, index) => (
+                <div key={`${currentIndex}-${index}`} className="h-full">
+                  <ProductCard product={product} />
+                </div>
+              ))}
+            </div>
+
+            {/* Next Button */}
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={goToNext}
+              className="h-10 w-10 md:h-12 md:w-12 flex-shrink-0 bg-transparent"
+              aria-label="Next products"
+            >
+              <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
+            </Button>
+          </div>
+
+          {/* Indicator dots */}
+          <div className="flex justify-center gap-2 mt-6">
+            {topProducts.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`h-2 rounded-full transition-all ${
+                  index === currentIndex ? "w-8 bg-primary" : "w-2 bg-border"
+                }`}
+                aria-label={`Go to product ${index + 1}`}
+              />
             ))}
           </div>
-
-          {/* Gradient Overlays */}
-          <div className="absolute left-0 top-0 bottom-4 w-4 md:w-8 bg-gradient-to-r from-background to-transparent pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-4 w-4 md:w-8 bg-gradient-to-l from-background to-transparent pointer-events-none" />
-        </div>
-
-        {/* Mobile Navigation */}
-        <div className="flex justify-center gap-2 mt-4 md:hidden">
-          <Button variant="outline" size="icon" onClick={() => scroll("left")} disabled={!canScrollLeft}>
-            <ChevronLeft className="h-5 w-5" />
-          </Button>
-          <Button variant="outline" size="icon" onClick={() => scroll("right")} disabled={!canScrollRight}>
-            <ChevronRight className="h-5 w-5" />
-          </Button>
         </div>
       </div>
     </section>

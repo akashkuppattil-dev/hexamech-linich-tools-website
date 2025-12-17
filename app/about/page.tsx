@@ -21,7 +21,7 @@ export default function AboutPage() {
   return (
     <div className="pt-16 sm:pt-18 md:pt-20">
       {/* HERO */}
-      <section className="relative py-24 md:py-36 overflow-hidden">
+      <section className="relative py-8 md:py-12 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('/kerala-workshop-automotive-mechanic.jpg')` }}
@@ -29,7 +29,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/85 to-background/95" />
         </div>
         <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
-          <Badge className="mb-6 bg-primary/10 text-primary border-primary/20">Trusted Since 2023</Badge>
+          <Badge className="mb-6 bg-primary/10 text-primary border-primary/20">Trusted Since 2024</Badge>
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
             Powering India's Workshops with <span className="text-primary">Professional Tools</span>
           </h1>
@@ -41,14 +41,14 @@ export default function AboutPage() {
       </section>
 
       {/* WHO WE ARE */}
-      <section className="py-16 md:py-24">
+      <section className="py-8 md:py-12">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">Our Identity</Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">Who We Are</h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                <strong className="text-foreground">Hexamech Linich Tools</strong> was founded in 2023 in Chulliparamba,
+                <strong className="text-foreground">Hexamech Linich Tools</strong> was founded in 2024 in Chulliparamba,
                 near Farook College, Kerala — with a single mission: to provide automotive workshops with reliable
                 access to genuine, professional-grade tools at wholesale prices.
               </p>
@@ -71,22 +71,22 @@ export default function AboutPage() {
               <Image
                 src="/images/logo.jpg"
                 alt="Hexamech Linich Tools Logo"
-                width={336}
-                height={336}
-                className="object-contain drop-shadow-2xl"
+                width={600}
+                height={600}
+                className="object-contain drop-shadow-2xl hover:scale-110 transition-transform duration-300"
                 unoptimized
               />
             </div>
             <div className="absolute -bottom-6 -left-6 glass p-6 rounded-xl shadow-xl">
               <p className="text-4xl font-bold text-primary">Since</p>
-              <p className="text-5xl font-bold text-foreground">2023</p>
+              <p className="text-5xl font-bold text-foreground">2024</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* WHY CHOOSE US */}
-      <section className="py-16 md:py-24 bg-secondary/20">
+      <section className="py-10 md:py-14 bg-secondary/20">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Our Difference</Badge>
@@ -139,9 +139,9 @@ export default function AboutPage() {
       </section>
 
       {/* FOUNDERS */}
-      <section className="py-16 md:py-24">
+      <section className="py-10 md:py-14">
         <div className="container mx-auto px-4 max-w-5xl">
-          <div className="text-center mb-14">
+          <div className="text-center mb-10">
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Leadership</Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Meet the Founders</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -150,7 +150,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="space-y-16">
+          <div className="space-y-12">
             {/* 1. JITHIN */}
             <div className="grid md:grid-cols-3 gap-8 items-center">
               <div className="flex justify-center">
@@ -166,12 +166,12 @@ export default function AboutPage() {
               <div className="md:col-span-2 text-center md:text-left">
                 <h3 className="text-2xl font-bold text-foreground">Jithin Mullasseri Chulliyil</h3>
                 <p className="text-primary font-semibold mb-4">Co-Founder of Hexamech | Chief Executive Officer</p>
-                <p className="text-muted-foreground leading-relaxed mb-3">
+                <p className="text-muted-foreground leading-relaxed mb-4">
                   Jithin is the driving force behind Hexamech's vision and strategic direction. With a deep-rooted
                   passion for automotive technology and years of hands-on experience in the industry, he understands
                   exactly what workshops need to operate at their best.
                 </p>
-                <p className="text-muted-foreground leading-relaxed mb-3">
+                <p className="text-muted-foreground leading-relaxed mb-4">
                   As CEO, Jithin oversees supplier partnerships, brand selection, and quality assurance — personally
                   ensuring that every tool Hexamech supplies meets the rigorous standards demanded by professional
                   mechanics.
@@ -198,12 +198,12 @@ export default function AboutPage() {
               <div className="md:col-span-2 text-center md:text-left md:order-1">
                 <h3 className="text-2xl font-bold text-foreground">Lineesh TP</h3>
                 <p className="text-primary font-semibold mb-4">Co-Founder of Hexamech | Sales & Business Development</p>
-                <p className="text-muted-foreground leading-relaxed mb-3">
+                <p className="text-muted-foreground leading-relaxed mb-4">
                   Lineesh brings exceptional expertise in sales strategy and dealer development to Hexamech. His ability
                   to understand market dynamics and customer needs has been pivotal in building Hexamech's extensive
                   network of workshop partners.
                 </p>
-                <p className="text-muted-foreground leading-relaxed mb-3">
+                <p className="text-muted-foreground leading-relaxed mb-4">
                   He leads all sales initiatives, dealer engagement programs, and regional expansion efforts — ensuring
                   Hexamech stays closely connected to the real-world requirements of automotive professionals.
                 </p>
@@ -229,12 +229,12 @@ export default function AboutPage() {
               <div className="md:col-span-2 text-center md:text-left">
                 <h3 className="text-2xl font-bold text-foreground">Shaibeesh TP</h3>
                 <p className="text-primary font-semibold mb-4">Co-Founder of Hexamech | Operations & Supply Chain</p>
-                <p className="text-muted-foreground leading-relaxed mb-3">
+                <p className="text-muted-foreground leading-relaxed mb-4">
                   Shaibeesh is the operational backbone of Hexamech, ensuring that every order is fulfilled accurately,
                   on time, and with the utmost care. His expertise in logistics and supply chain management keeps
                   Hexamech running like a well-oiled machine.
                 </p>
-                <p className="text-muted-foreground leading-relaxed mb-3">
+                <p className="text-muted-foreground leading-relaxed mb-4">
                   He manages inventory planning, warehouse operations, vendor coordination, and delivery logistics —
                   making sure workshops receive their tools exactly when they need them.
                 </p>
@@ -249,7 +249,7 @@ export default function AboutPage() {
       </section>
 
       {/* TEAM */}
-      <section className="py-16 md:py-24 bg-secondary/30">
+      <section className="py-10 md:py-14 bg-secondary/30">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">Our People</Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">The Hexamech Team</h2>
@@ -270,9 +270,9 @@ export default function AboutPage() {
       </section>
 
       {/* MISSION / VISION / FUTURE */}
-      <section className="py-16 md:py-24">
+      <section className="py-10 md:py-14">
         <div className="container mx-auto px-4 max-w-5xl">
-          <div className="text-center mb-12">
+          <div className="text-center mb-10">
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Our Direction</Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">What Drives Us Forward</h2>
           </div>
@@ -315,9 +315,9 @@ export default function AboutPage() {
       </section>
 
       {/* STATS */}
-      <section className="py-16 md:py-24 bg-primary">
+      <section className="py-10 md:py-14 bg-primary">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">Hexamech by the Numbers</h2>
             <p className="text-primary-foreground/80">Our growth reflects the trust workshops place in us every day.</p>
           </div>
@@ -330,9 +330,9 @@ export default function AboutPage() {
       </section>
 
       {/* LOCATION */}
-      <section className="py-16 md:py-24">
+      <section className="py-10 md:py-14">
         <div className="container mx-auto px-4 max-w-4xl">
-          <div className="text-center mb-12">
+          <div className="text-center mb-10">
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Visit Us</Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Location</h2>
             <p className="text-muted-foreground">Based in Kerala, serving workshops across India.</p>

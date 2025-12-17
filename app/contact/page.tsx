@@ -77,7 +77,7 @@ export default function ContactPage() {
   return (
     <div className="pt-16 sm:pt-18 md:pt-20">
       {/* Hero Section - Improved mobile */}
-      <section className="py-10 sm:py-16 md:py-24 bg-gradient-to-br from-secondary/50 via-background to-primary/5 relative overflow-hidden">
+      <section className="py-8 sm:py-10 md:py-12 bg-gradient-to-br from-secondary/50 via-background to-primary/5 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/4 right-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-1/4 left-1/4 w-32 sm:w-64 h-32 sm:h-64 bg-accent/10 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -114,7 +114,7 @@ export default function ContactPage() {
       </section>
 
       {/* Why Contact Us - Improved mobile grid */}
-      <section className="py-8 sm:py-12 border-b border-border bg-card">
+      <section className="py-4 sm:py-6 border-b border-border bg-card">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {whyContactUs.map((item) => (
@@ -131,11 +131,11 @@ export default function ContactPage() {
       </section>
 
       {/* Main Content - Improved mobile layout */}
-      <section className="py-10 sm:py-16 md:py-24">
+      <section className="py-8 sm:py-10 md:py-12">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
-            {/* Contact Form */}
-            <div>
+          <div className="grid lg:grid-cols-3 gap-8 sm:gap-12">
+            {/* Contact Form - Left Column */}
+            <div className="lg:col-span-2">
               <Badge className="mb-3 sm:mb-4 bg-accent/10 text-accent border-accent/20 text-xs sm:text-sm">
                 Get in Touch
               </Badge>
@@ -149,122 +149,125 @@ export default function ContactPage() {
               <ContactForm />
             </div>
 
-            {/* Contact Info */}
-            <div>
+            {/* Contact Info - Right Column */}
+            <div className="lg:col-span-1 space-y-4 sm:space-y-6">
               <Badge className="mb-3 sm:mb-4 bg-primary/10 text-primary border-primary/20 text-xs sm:text-sm">
-                Contact Information
+                Quick Contact
               </Badge>
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 sm:mb-6">Talk to Our Team</h2>
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground">Contact Channels</h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                {contactMethods.map((method) => (
-                  <Card key={method.title} className="glass hover:shadow-lg transition-all duration-300">
-                    <CardContent className="p-4 sm:p-6">
-                      <div className="flex items-start gap-3 sm:gap-4">
-                        <div className="p-2 sm:p-3 bg-primary/10 rounded-lg sm:rounded-xl shrink-0">
-                          <method.icon className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                        </div>
-                        <div className="min-w-0">
-                          <h3 className="font-semibold text-foreground text-sm sm:text-base">{method.title}</h3>
-                          {method.href ? (
-                            <a
-                              href={method.href}
-                              className="text-primary hover:underline font-medium text-sm sm:text-base break-all"
-                              target={method.href.startsWith("http") ? "_blank" : undefined}
-                              rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                            >
-                              {method.value}
-                            </a>
-                          ) : (
-                            <p className="font-medium text-foreground text-sm sm:text-base">{method.value}</p>
-                          )}
-                          <p className="text-xs sm:text-sm text-muted-foreground mt-1">{method.description}</p>
-                        </div>
+              {contactMethods.map((method) => (
+                <Card key={method.title} className="glass hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-3 sm:p-4">
+                    <div className="flex items-start gap-2 sm:gap-3">
+                      <div className="p-1.5 sm:p-2 bg-primary/10 rounded-lg shrink-0">
+                        <method.icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              {/* Trust Indicators */}
-              <Card className="glass mb-6 sm:mb-8 border-primary/20">
-                <CardContent className="p-4 sm:p-6">
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="p-2 sm:p-3 bg-primary/10 rounded-lg sm:rounded-xl shrink-0">
-                      <ShieldCheck className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+                      <div className="min-w-0">
+                        <h4 className="font-semibold text-foreground text-xs sm:text-sm">{method.title}</h4>
+                        {method.href ? (
+                          <a
+                            href={method.href}
+                            className="text-primary hover:underline font-medium text-xs sm:text-sm break-all"
+                            target={method.href.startsWith("http") ? "_blank" : undefined}
+                            rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                          >
+                            {method.value}
+                          </a>
+                        ) : (
+                          <p className="font-medium text-foreground text-xs sm:text-sm">{method.value}</p>
+                        )}
+                        <p className="text-xs text-muted-foreground mt-0.5">{method.description}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground text-sm sm:text-base mb-2 sm:mb-3">
-                        Trusted B2B Supplier
-                      </h3>
-                      <ul className="text-xs sm:text-sm text-muted-foreground space-y-1.5 sm:space-y-2">
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-primary shrink-0" />
-                          GST Registered Business
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-primary shrink-0" />
-                          Genuine OEM & Professional Tool Brands
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-primary shrink-0" />
-                          Dedicated B2B Sales & Support Team
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-primary shrink-0" />
-                          Secure & Confidential Enquiries
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
 
-              {/* Address */}
-              <Card className="glass">
-                <CardContent className="p-4 sm:p-6">
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="p-2 sm:p-3 bg-accent/10 rounded-lg sm:rounded-xl shrink-0">
-                      <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground text-sm sm:text-base mb-2">Visit Our Office</h3>
-                      <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                        Ground Floor, Door No 17/346,
-                        <br />
-                        Vpalp School, Chulliparamb,
-                        <br />
-                        Near Farook College, Calicut
-                        <br />
-                        Kerala – India
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Google Map */}
-              <div className="mt-6 sm:mt-8 rounded-xl overflow-hidden aspect-video relative group shadow-lg">
-                <a
-                  href="https://maps.app.goo.gl/JB79VHee4sQ4QkDT7"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute inset-0 z-10"
-                  aria-label="Open location in Google Maps"
-                />
-
-                <iframe
-                  src="https://www.google.com/maps?q=Near+Farook+College+Calicut+Kerala&output=embed"
-                  className="w-full h-full pointer-events-none"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Hexamech Linich Tools Location"
-                />
-
-                <div className="absolute bottom-3 right-3 bg-background/90 backdrop-blur px-3 py-1.5 rounded-lg text-xs font-medium text-foreground shadow-md opacity-0 group-hover:opacity-100 transition">
-                  Open in Google Maps
+          {/* Trust Indicators - Full Width */}
+          <Card className="glass my-8 sm:my-12 border-primary/20">
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="p-2 sm:p-3 bg-primary/10 rounded-lg sm:rounded-xl shrink-0">
+                  <ShieldCheck className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground text-sm sm:text-base mb-2 sm:mb-3">
+                    Trusted B2B Supplier
+                  </h3>
+                  <ul className="text-xs sm:text-sm text-muted-foreground space-y-1.5 sm:space-y-2">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-primary shrink-0" />
+                      GST Registered Business
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-primary shrink-0" />
+                      Genuine OEM & Professional Tool Brands
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-primary shrink-0" />
+                      Dedicated B2B Sales & Support Team
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-primary shrink-0" />
+                      Secure & Confidential Enquiries
+                    </li>
+                  </ul>
                 </div>
               </div>
+            </CardContent>
+          </Card>
+
+          {/* Address - Full Width */}
+          <Card className="glass">
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="p-2 sm:p-3 bg-accent/10 rounded-lg sm:rounded-xl shrink-0">
+                  <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground text-sm sm:text-base mb-2">Visit Our Office</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    Ground Floor, Door No 17/346,
+                    <br />
+                    Vpalp School, Chulliparamb,
+                    <br />
+                    Near Farook College, Calicut
+                    <br />
+                    Kerala – India
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Find Our Location - Updated map size */}
+      <section className="py-8 sm:py-10 md:py-12 bg-secondary/30 border-t border-border">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">Find Our Location</h2>
+          <div className="rounded-xl overflow-hidden aspect-square md:aspect-video relative group shadow-lg max-w-2xl">
+            <a
+              href="https://maps.app.goo.gl/JB79VHee4sQ4QkDT7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-0 z-10"
+              aria-label="Open location in Google Maps"
+            />
+
+            <iframe
+              src="https://www.google.com/maps?q=Near+Farook+College+Calicut+Kerala&output=embed"
+              className="w-full h-full pointer-events-none"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Hexamech Linich Tools Location"
+            />
+
+            <div className="absolute bottom-3 right-3 bg-background/90 backdrop-blur px-3 py-1.5 rounded-lg text-xs font-medium text-foreground shadow-md opacity-0 group-hover:opacity-100 transition">
+              Open in Google Maps
             </div>
           </div>
         </div>

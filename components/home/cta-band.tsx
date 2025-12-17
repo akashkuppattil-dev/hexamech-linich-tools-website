@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 export function CtaBand() {
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-primary relative overflow-hidden">
+    <section className="py-8 sm:py-10 md:py-12 bg-primary relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div

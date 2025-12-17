@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 
 export function InstagramStrip() {
   return (
-    <section className="py-10 sm:py-12 md:py-16 bg-gradient-to-r from-pink-500/5 via-purple-500/10 to-pink-500/5 border-t border-border/50">
+    <section className="py-6 sm:py-8 md:py-10 bg-gradient-to-r from-pink-500/5 via-purple-500/10 to-pink-500/5 border-t border-border/50">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center">
           {/* Instagram Icon with gradient */}
@@ -32,7 +32,7 @@ export function InstagramStrip() {
           </a>
 
           {/* Trust indicators */}
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mt-6 sm:mt-8 text-xs sm:text-sm text-muted-foreground">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mt-4 sm:mt-6 text-xs sm:text-sm text-muted-foreground">
             <span>Daily Product Updates</span>
             <span className="text-pink-500">•</span>
             <span>Live Delivery Stories</span>

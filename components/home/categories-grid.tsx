@@ -6,7 +6,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import { categories } from "@/lib/products"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { useRef, useState } from "react"
+import { useState } from "react"
 
 const categoryImages: Record<string, string> = {
   "hand-tools": "/hand-tools-wrenches-pliers-professional.jpg",
@@ -22,35 +22,31 @@ const categoryImages: Record<string, string> = {
 }
 
 export function CategoriesGrid() {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [canScrollLeft, setCanScrollLeft] = useState(false)
-  const [canScrollRight, setCanScrollRight] = useState(true)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const itemsToShow = 4 // reduced from 6 to 4 items displayed
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % categories.length)
+  }
+
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + categories.length) % categories.length)
+  }
 
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: "instant" })
   }
 
-  const checkScroll = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current
-      setCanScrollLeft(scrollLeft > 0)
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
+  const getVisibleCategories = () => {
+    const items = []
+    for (let i = 0; i < Math.min(itemsToShow, categories.length); i++) {
+      items.push(categories[(currentIndex + i) % categories.length])
     }
-  }
-
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const scrollAmount = 320
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      })
-      setTimeout(checkScroll, 300)
-    }
+    return items
   }
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 bg-secondary/30">
+    <section className="py-8 md:py-10 bg-secondary/30">
       <div className="container mx-auto px-4">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 md:mb-12">
           <div className="text-center sm:text-left">
@@ -62,34 +58,31 @@ export function CategoriesGrid() {
               everything your workshop needs.
             </p>
           </div>
-          <div className="flex items-center gap-3">
-            <Link href="/shop" onClick={handleClick}>
-              <Button variant="outline" className="group w-full sm:w-auto bg-transparent">
-                View All Categories
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-            <div className="hidden md:flex gap-2">
-              <Button variant="outline" size="icon" onClick={() => scroll("left")} disabled={!canScrollLeft}>
-                <ChevronLeft className="h-5 w-5" />
-              </Button>
-              <Button variant="outline" size="icon" onClick={() => scroll("right")} disabled={!canScrollRight}>
-                <ChevronRight className="h-5 w-5" />
-              </Button>
-            </div>
-          </div>
+          <Link href="/shop" onClick={handleClick}>
+            <Button variant="outline" className="group w-full sm:w-auto bg-transparent">
+              View All Categories
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
         </div>
 
         <div className="relative">
-          <div
-            ref={scrollRef}
-            className="flex gap-4 md:gap-6 overflow-x-auto scrollbar-hide pb-4"
-            onScroll={checkScroll}
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {categories.slice(0, 10).map((category) => (
-              <Link key={category.id} href="/shop" onClick={handleClick}>
-                <div className="min-w-[240px] max-w-[240px] sm:min-w-[260px] sm:max-w-[260px] md:min-w-[280px] md:max-w-[280px]">
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={goToPrev}
+              className="h-10 w-10 md:h-12 md:w-12 flex-shrink-0 bg-transparent"
+              aria-label="Previous categories"
+            >
+              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
+            </Button>
+
+            <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 py-6">
+              {" "}
+              {/* changed lg:grid-cols-6 to lg:grid-cols-4 */}
+              {getVisibleCategories().map((category) => (
+                <Link key={category.id} href="/shop" onClick={handleClick}>
                   <Card className="group glass overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full cursor-pointer">
                     <div className="aspect-[4/3] relative overflow-hidden">
                       <Image
@@ -101,37 +94,41 @@ export function CategoriesGrid() {
                       <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
                     </div>
 
-                    <CardContent className="p-3 sm:p-4 relative">
-                      <h3 className="font-semibold text-sm sm:text-base text-foreground group-hover:text-primary transition-colors line-clamp-1">
+                    <CardContent className="p-2 sm:p-3 relative">
+                      <h3 className="font-semibold text-xs sm:text-sm text-foreground group-hover:text-primary transition-colors line-clamp-1">
                         {category.name}
                       </h3>
-                      <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2 mt-1 mb-2 sm:mb-3 hidden sm:block">
-                        {category.description}
-                      </p>
-                      <span className="inline-flex items-center text-xs sm:text-sm font-medium text-primary group-hover:gap-2 transition-all">
-                        View All
-                        <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                      </span>
+                      <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5">{category.description}</p>
                     </CardContent>
                   </Card>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
+            </div>
+
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={goToNext}
+              className="h-10 w-10 md:h-12 md:w-12 flex-shrink-0 bg-transparent"
+              aria-label="Next categories"
+            >
+              <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
+            </Button>
           </div>
 
-          {/* Gradient Overlays */}
-          <div className="absolute left-0 top-0 bottom-4 w-4 md:w-8 bg-gradient-to-r from-background to-transparent pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-4 w-4 md:w-8 bg-gradient-to-l from-background to-transparent pointer-events-none" />
-        </div>
-
-        {/* Mobile Navigation */}
-        <div className="flex justify-center gap-2 mt-4 md:hidden">
-          <Button variant="outline" size="icon" onClick={() => scroll("left")} disabled={!canScrollLeft}>
-            <ChevronLeft className="h-5 w-5" />
-          </Button>
-          <Button variant="outline" size="icon" onClick={() => scroll("right")} disabled={!canScrollRight}>
-            <ChevronRight className="h-5 w-5" />
-          </Button>
+          {/* Indicator dots */}
+          <div className="flex justify-center gap-2 mt-6">
+            {categories.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`h-2 rounded-full transition-all ${
+                  index === currentIndex ? "w-8 bg-primary" : "w-2 bg-border"
+                }`}
+                aria-label={`Go to category ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -11,7 +11,8 @@ import { ShopFilters } from "@/components/shop/shop-filters"
 import { products, categories, brands } from "@/lib/products"
 import { Badge } from "@/components/ui/badge"
 
-const ITEMS_PER_PAGE = 12
+const ITEMS_PER_PAGE_MOBILE = 6
+const ITEMS_PER_PAGE_DESKTOP = 12
 
 type SortOption = "popularity" | "latest" | "price-low" | "price-high" | "rating"
 
@@ -25,6 +26,14 @@ export function ShopContent() {
   const [gridCols, setGridCols] = useState<3 | 4 | 6>(4)
   const [currentPage, setCurrentPage] = useState(1)
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   useEffect(() => {
     const category = searchParams.get("category")
@@ -91,8 +100,9 @@ export function ShopContent() {
     return filtered
   }, [selectedCategories, selectedBrands, priceRange, availability, sortBy, searchParams])
 
-  const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE)
-  const paginatedProducts = filteredProducts.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE)
+  const itemsPerPage = isMobile ? ITEMS_PER_PAGE_MOBILE : ITEMS_PER_PAGE_DESKTOP
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
+  const paginatedProducts = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 
   const clearFilters = () => {
     setSelectedCategories([])
@@ -109,7 +119,7 @@ export function ShopContent() {
     (priceRange[0] > 0 || priceRange[1] < 50000 ? 1 : 0)
 
   return (
-    <div className="container mx-auto px-4 py-6 md:py-8">
+    <div className="container mx-auto px-4 py-4 md:py-6">
       <div className="mb-12">
         <div className="flex items-center gap-2 mb-3">
           <Badge variant="secondary" className="px-3 py-1">

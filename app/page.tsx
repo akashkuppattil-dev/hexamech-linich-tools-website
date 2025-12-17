@@ -1,15 +1,47 @@
+import dynamic from "next/dynamic"
 import { HeroSection } from "@/components/home/hero-section"
 import { TrustBand } from "@/components/home/trust-band"
-import { TopProductsCarousel } from "@/components/home/top-products-carousel"
-import { CategoriesGrid } from "@/components/home/categories-grid"
-import { ProductVideosSection } from "@/components/home/product-videos-section"
-import { TestimonialsSlider } from "@/components/home/testimonials-slider"
-import { WhyHexamech } from "@/components/home/why-hexamech"
-import { BusinessDetails } from "@/components/home/business-details"
-import { BrandsSection } from "@/components/home/brands-section"
-import { TrustedCustomersSection } from "@/components/home/trusted-customers-section"
-import { CtaBand } from "@/components/home/cta-band"
-import { InstagramStrip } from "@/components/home/instagram-strip"
+
+// Lazy load heavy components for better initial page load
+const TopProductsCarousel = dynamic(() => import("@/components/home/top-products-carousel").then(mod => ({ default: mod.TopProductsCarousel })), {
+  loading: () => <div className="h-64 bg-secondary/20 animate-pulse rounded-lg" />,
+})
+
+const CategoriesGrid = dynamic(() => import("@/components/home/categories-grid").then(mod => ({ default: mod.CategoriesGrid })), {
+  loading: () => <div className="h-96 bg-secondary/20 animate-pulse rounded-lg" />,
+})
+
+const BrandsSection = dynamic(() => import("@/components/home/brands-section").then(mod => ({ default: mod.BrandsSection })), {
+  loading: () => <div className="h-96 bg-secondary/20 animate-pulse rounded-lg" />,
+})
+
+const TrustedCustomersSection = dynamic(() => import("@/components/home/trusted-customers-section").then(mod => ({ default: mod.TrustedCustomersSection })), {
+  loading: () => <div className="h-64 bg-secondary/20 animate-pulse rounded-lg" />,
+})
+
+const ProductVideosSection = dynamic(() => import("@/components/home/product-videos-section").then(mod => ({ default: mod.ProductVideosSection })), {
+  loading: () => <div className="h-64 bg-secondary/20 animate-pulse rounded-lg" />,
+})
+
+const TestimonialsSlider = dynamic(() => import("@/components/home/testimonials-slider").then(mod => ({ default: mod.TestimonialsSlider })), {
+  loading: () => <div className="h-64 bg-secondary/20 animate-pulse rounded-lg" />,
+})
+
+const WhyHexamech = dynamic(() => import("@/components/home/why-hexamech").then(mod => ({ default: mod.WhyHexamech })), {
+  loading: () => <div className="h-96 bg-secondary/20 animate-pulse rounded-lg" />,
+})
+
+const BusinessDetails = dynamic(() => import("@/components/home/business-details").then(mod => ({ default: mod.BusinessDetails })), {
+  loading: () => <div className="h-64 bg-secondary/20 animate-pulse rounded-lg" />,
+})
+
+const CtaBand = dynamic(() => import("@/components/home/cta-band").then(mod => ({ default: mod.CtaBand })), {
+  loading: () => <div className="h-32 bg-secondary/20 animate-pulse rounded-lg" />,
+})
+
+const InstagramStrip = dynamic(() => import("@/components/home/instagram-strip").then(mod => ({ default: mod.InstagramStrip })), {
+  loading: () => <div className="h-32 bg-secondary/20 animate-pulse rounded-lg" />,
+})
 
 export default function HomePage() {
   return (

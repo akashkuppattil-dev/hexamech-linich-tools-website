@@ -71,7 +71,7 @@ export function Footer() {
                 width={56}
                 height={56}
                 className="rounded-xl"
-                unoptimized
+                sizes="56px"
               />
               <div>
                 <h2 className="font-bold text-lg text-foreground">Hexamech</h2>

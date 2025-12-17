@@ -18,6 +18,8 @@ interface ShopFiltersProps {
   setSelectedCategories: (categories: string[]) => void
   selectedBrands: string[]
   setSelectedBrands: (brands: string[]) => void
+  priceRange: [number, number]
+  setPriceRange: (range: [number, number]) => void
   availability: string[]
   setAvailability: (availability: string[]) => void
   onClearFilters: () => void
@@ -31,6 +33,8 @@ export function ShopFilters({
   setSelectedCategories,
   selectedBrands,
   setSelectedBrands,
+  priceRange,
+  setPriceRange,
   availability,
   setAvailability,
   onClearFilters,

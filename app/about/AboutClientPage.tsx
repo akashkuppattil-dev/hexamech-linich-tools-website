@@ -1,12 +1,11 @@
 "use client"
 
-import React from "react"
-import { useState } from "react"
-import Image from "next/image"
+import StatsCounter from "@/components/about/stats-counter"
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
-import { Award, Truck, Wrench, Users, Target, ChevronLeft, ChevronRight, Eye, Rocket } from "lucide-react"
-import StatsCounter from "@/components/about/stats-counter"
+import { Award, ChevronLeft, ChevronRight, Eye, Rocket, Target, Truck, Users, Wrench } from "lucide-react"
+import Image from "next/image"
+import React, { useState } from "react"
 
 const stats = [
   { label: "Annual Turnover", value: "1.5-5", suffix: "Cr", iconName: "Award" as const },
@@ -75,8 +74,8 @@ export default function AboutClientPage() {
   ]
 
   // Handle touch for carousels
-  const handleTrustTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX)
-  const handleTrustTouchEnd = (e) => {
+  const handleTrustTouchStart = (e: React.TouchEvent) => setTouchStart(e.targetTouches[0].clientX)
+  const handleTrustTouchEnd = (e: React.TouchEvent) => {
     setTouchEnd(e.changedTouches[0].clientX)
     handleTrustSwipe()
   }
@@ -91,8 +90,8 @@ export default function AboutClientPage() {
     }
   }
 
-  const handleFoundersTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX)
-  const handleFoundersTouchEnd = (e) => {
+  const handleFoundersTouchStart = (e: React.TouchEvent) => setTouchStart(e.targetTouches[0].clientX)
+  const handleFoundersTouchEnd = (e: React.TouchEvent) => {
     setTouchEnd(e.changedTouches[0].clientX)
     handleFoundersSwipe()
   }
@@ -157,7 +156,8 @@ export default function AboutClientPage() {
                 width={600}
                 height={600}
                 className="object-contain drop-shadow-2xl hover:scale-110 transition-transform duration-300"
-                unoptimized
+                sizes="(max-width: 768px) 100vw, 600px"
+                priority
               />
             </div>
           </div>

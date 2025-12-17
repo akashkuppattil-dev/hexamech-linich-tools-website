@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
+import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Image from "next/image"
+import { useEffect, useState } from "react"
 
 const customers = [
   { name: "Mahindra", logo: "/images/customers/mahindra.jpeg" },
@@ -24,16 +24,25 @@ const customers = [
 
 export function TrustedCustomersSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const itemsPerRow = typeof window !== "undefined" && window.innerWidth < 768 ? 2 : 6
+  const [itemsPerRow, setItemsPerRow] = useState(6)
   const totalRows = 2
   const itemsPerPage = itemsPerRow * totalRows
+
+  useEffect(() => {
+    const updateItemsPerRow = () => {
+      setItemsPerRow(window.innerWidth < 768 ? 2 : 6)
+    }
+    updateItemsPerRow()
+    window.addEventListener("resize", updateItemsPerRow)
+    return () => window.removeEventListener("resize", updateItemsPerRow)
+  }, [])
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + itemsPerRow) % customers.length)
     }, 4000)
     return () => clearInterval(timer)
-  }, [])
+  }, [itemsPerRow])
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev - itemsPerRow + customers.length) % customers.length)
@@ -82,7 +91,8 @@ export function TrustedCustomersSection() {
                     alt={customer.name}
                     fill
                     className="object-contain p-1 sm:p-2 scale-125"
-                    unoptimized
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 16vw"
+                    loading="lazy"
                   />
                 </div>
               </Card>

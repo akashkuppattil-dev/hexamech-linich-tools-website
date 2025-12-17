@@ -1,23 +1,27 @@
-import type React from "react"
+import { Footer } from "@/components/layout/footer"
+import { Header } from "@/components/layout/header"
+import { ThemeProvider } from "@/components/theme-provider"
+import { WhatsAppButton } from "@/components/whatsapp-button"
+import { CartProvider } from "@/context/cart-context"
+import { Analytics } from "@vercel/analytics/next"
 import type { Metadata, Viewport } from "next"
 import { Barlow, Inter } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
+import type React from "react"
 import "./globals.css"
-import { Header } from "@/components/layout/header"
-import { Footer } from "@/components/layout/footer"
-import { WhatsAppButton } from "@/components/whatsapp-button"
-import { ThemeProvider } from "@/components/theme-provider"
-import { CartProvider } from "@/context/cart-context"
 
 const barlow = Barlow({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-barlow",
+  display: "swap",
+  preload: true,
 })
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+  preload: true,
 })
 
 export const metadata: Metadata = {
@@ -96,7 +100,7 @@ export default function RootLayout({
           href="https://5.imimg.com/data5/SELLER/Logo/2024/11/463774909/FM/DK/XY/135087769/imtemp1727699006-120x120.jpeg"
         />
       </head>
-      <body className={`${barlow.variable} ${inter.variable} font-sans antialiased`}>
+      <body className={`${barlow.variable} ${inter.variable} font-sans antialiased`} suppressHydrationWarning>
         <ThemeProvider>
           <CartProvider>
             <Header />

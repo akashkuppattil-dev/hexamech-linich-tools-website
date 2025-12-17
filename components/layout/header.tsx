@@ -1,16 +1,16 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import Image from "next/image"
-import { Menu, Search, Heart, ShoppingCart, Sun, Moon, X, Home, Store, Tag, Users, Phone } from "lucide-react"
+import { SearchDropdown } from "@/components/search-dropdown"
+import { useTheme } from "@/components/theme-provider"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { useTheme } from "@/components/theme-provider"
 import { useCart } from "@/context/cart-context"
-import { SearchDropdown } from "@/components/search-dropdown"
+import { Heart, Home, Menu, Moon, Phone, Search, ShoppingCart, Store, Sun, Tag, Users, X } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
 
 const navLinks = [
   { href: "/", label: "Home", icon: Home },
@@ -27,19 +27,27 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const { theme, toggleTheme } = useTheme()
   const { wishlist } = useCart()
   const pathname = usePathname()
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10)
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    setMounted(true)
   }, [])
 
   useEffect(() => {
+    if (!mounted) return
+    const handleScroll = () => setIsScrolled(window.scrollY > 10)
+    window.addEventListener("scroll", handleScroll)
+    handleScroll() // Set initial state
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [mounted])
+
+  useEffect(() => {
+    if (!mounted) return
     window.scrollTo({ top: 0, behavior: "instant" })
-  }, [pathname])
+  }, [pathname, mounted])
 
   const handleNavClick = () => {
     setMobileMenuOpen(false)
@@ -65,7 +73,7 @@ export function Header() {
                     fill
                     className="object-contain"
                     priority
-                    unoptimized
+                    sizes="64px"
                   />
                 </div>
                 <div className="block">
@@ -108,23 +116,26 @@ export function Header() {
                       setSearchOpen(e.target.value.length > 0)
                     }}
                     onBlur={() => setTimeout(() => setSearchOpen(false), 200)}
+                    suppressHydrationWarning
                   />
                   {searchOpen && <SearchDropdown query={searchQuery} onClose={() => setSearchOpen(false)} />}
                 </div>
 
                 {/* Theme */}
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={toggleTheme}
-                  className="h-8 w-8 sm:h-9 sm:w-9 rounded-full hover:bg-secondary flex-shrink-0"
-                >
-                  {theme === "light" ? (
-                    <Moon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground" />
-                  ) : (
-                    <Sun className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent" />
-                  )}
-                </Button>
+                {mounted && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={toggleTheme}
+                    className="h-8 w-8 sm:h-9 sm:w-9 rounded-full hover:bg-secondary flex-shrink-0"
+                  >
+                    {theme === "light" ? (
+                      <Moon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground" />
+                    ) : (
+                      <Sun className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent" />
+                    )}
+                  </Button>
+                )}
 
                 {/* Wishlist */}
                 <Link href="/wishlist" onClick={handleNavClick}>

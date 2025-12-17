@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, type ReactNode } from "react"
+import { createContext, useContext, useState, useCallback, useMemo, type ReactNode } from "react"
 
 export interface CartItem {
   id: string
@@ -56,7 +56,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [wishlist, setWishlist] = useState<WishlistItem[]>([])
   const [compare, setCompare] = useState<CompareItem[]>([])
 
-  const addToCart = (item: Omit<CartItem, "quantity"> & { quantity?: number }) => {
+  const addToCart = useCallback((item: Omit<CartItem, "quantity"> & { quantity?: number }) => {
     setCart((prev) => {
       const existing = prev.find((i) => i.id === item.id)
       if (existing) {
@@ -66,76 +66,91 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, { ...item, quantity: item.quantity || item.minOrderQty }]
     })
-  }
+  }, [])
 
-  const removeFromCart = (id: string) => {
+  const removeFromCart = useCallback((id: string) => {
     setCart((prev) => prev.filter((item) => item.id !== id))
-  }
+  }, [])
 
-  const updateQuantity = (id: string, quantity: number) => {
+  const updateQuantity = useCallback((id: string, quantity: number) => {
     setCart((prev) =>
       prev.map((item) => (item.id === id ? { ...item, quantity: Math.max(item.minOrderQty, quantity) } : item)),
     )
-  }
+  }, [])
 
-  const updateNote = (id: string, note: string) => {
+  const updateNote = useCallback((id: string, note: string) => {
     setCart((prev) => prev.map((item) => (item.id === id ? { ...item, note } : item)))
-  }
+  }, [])
 
-  const clearCart = () => setCart([])
+  const clearCart = useCallback(() => setCart([]), [])
 
-  const addToWishlist = (item: WishlistItem) => {
+  const addToWishlist = useCallback((item: WishlistItem) => {
     setWishlist((prev) => {
       if (prev.find((i) => i.id === item.id)) return prev
       return [...prev, item]
     })
-  }
+  }, [])
 
-  const removeFromWishlist = (id: string) => {
+  const removeFromWishlist = useCallback((id: string) => {
     setWishlist((prev) => prev.filter((item) => item.id !== id))
-  }
+  }, [])
 
-  const isInWishlist = (id: string) => wishlist.some((item) => item.id === id)
+  const isInWishlist = useCallback((id: string) => wishlist.some((item) => item.id === id), [wishlist])
 
-  const addToCompare = (item: CompareItem) => {
+  const addToCompare = useCallback((item: CompareItem) => {
     setCompare((prev) => {
       if (prev.find((i) => i.id === item.id)) return prev
       if (prev.length >= 4) return prev
       return [...prev, item]
     })
-  }
+  }, [])
 
-  const removeFromCompare = (id: string) => {
+  const removeFromCompare = useCallback((id: string) => {
     setCompare((prev) => prev.filter((item) => item.id !== id))
-  }
+  }, [])
 
-  const isInCompare = (id: string) => compare.some((item) => item.id === id)
+  const isInCompare = useCallback((id: string) => compare.some((item) => item.id === id), [compare])
 
-  const clearCompare = () => setCompare([])
+  const clearCompare = useCallback(() => setCompare([]), [])
 
-  return (
-    <CartContext.Provider
-      value={{
-        cart,
-        wishlist,
-        compare,
-        addToCart,
-        removeFromCart,
-        updateQuantity,
-        updateNote,
-        clearCart,
-        addToWishlist,
-        removeFromWishlist,
-        isInWishlist,
-        addToCompare,
-        removeFromCompare,
-        isInCompare,
-        clearCompare,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
+  const value = useMemo(
+    () => ({
+      cart,
+      wishlist,
+      compare,
+      addToCart,
+      removeFromCart,
+      updateQuantity,
+      updateNote,
+      clearCart,
+      addToWishlist,
+      removeFromWishlist,
+      isInWishlist,
+      addToCompare,
+      removeFromCompare,
+      isInCompare,
+      clearCompare,
+    }),
+    [
+      cart,
+      wishlist,
+      compare,
+      addToCart,
+      removeFromCart,
+      updateQuantity,
+      updateNote,
+      clearCart,
+      addToWishlist,
+      removeFromWishlist,
+      isInWishlist,
+      addToCompare,
+      removeFromCompare,
+      isInCompare,
+      clearCompare,
+    ],
   )
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }
 
 export function useCart() {

@@ -1,0 +1,44 @@
+===========================================
+   MOBILE ACCESS INFORMATION
+===========================================
+
+Your website is accessible on mobile devices!
+
+📱 MOBILE URL:
+   http://172.20.10.4:3001
+
+💻 LOCAL URL:
+   http://localhost:3001
+
+🌐 NETWORK URL:
+   http://172.20.10.4:3001
+
+===========================================
+   HOW TO ACCESS FROM MOBILE:
+===========================================
+
+1. Make sure your mobile is on the SAME Wi-Fi network
+   as your computer
+
+2. Open your mobile browser (Chrome, Safari, etc.)
+
+3. Type this address in the browser:
+   http://172.20.10.4:3001
+
+4. The website will load on your mobile!
+
+===========================================
+   IMPORTANT NOTES:
+===========================================
+
+✓ Server is running on port: 3001
+✓ Network access is ENABLED
+✓ IP Address: 172.20.10.4
+
+⚠ If you can't connect:
+  - Check that both devices are on same Wi-Fi
+  - Check Windows Firewall settings
+  - Make sure server is running
+
+===========================================
+

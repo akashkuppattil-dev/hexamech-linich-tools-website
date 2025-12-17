@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
-import { ChevronLeft, ChevronRight, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import { ChevronLeft, ChevronRight, Star } from "lucide-react"
+import Image from "next/image"
+import { useEffect, useState } from "react"
 
 const brands = [
   { name: "Blue-Point", logo: "/images/brands/blue-point-snapon.jpg" },
@@ -22,15 +22,24 @@ const brands = [
 
 export function BrandsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const brandsPerRow = typeof window !== "undefined" && window.innerWidth < 768 ? 2 : 6
+  const [brandsPerRow, setBrandsPerRow] = useState(6)
   const totalRows = 2
+
+  useEffect(() => {
+    const updateBrandsPerRow = () => {
+      setBrandsPerRow(window.innerWidth < 768 ? 2 : 6)
+    }
+    updateBrandsPerRow()
+    window.addEventListener("resize", updateBrandsPerRow)
+    return () => window.removeEventListener("resize", updateBrandsPerRow)
+  }, [])
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + brandsPerRow) % brands.length)
     }, 3000)
     return () => clearInterval(timer)
-  }, [])
+  }, [brandsPerRow])
 
   const nextRow = () => {
     setCurrentIndex((prev) => (prev + brandsPerRow) % brands.length)
@@ -71,7 +80,8 @@ export function BrandsSection() {
                   alt="LINICH - Main Brand Partner"
                   fill
                   className="object-contain"
-                  unoptimized
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  priority
                 />
               </div>
               <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">LINICH</h3>
@@ -118,7 +128,8 @@ export function BrandsSection() {
                     alt={brand.name}
                     fill
                     className="object-contain p-2.5 md:p-3 scale-160 hover:scale-175 transition-transform duration-300"
-                    unoptimized
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                    loading="lazy"
                   />
                 </div>
               </Card>

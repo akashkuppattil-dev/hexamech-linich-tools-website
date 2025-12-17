@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev --turbo -H 0.0.0.0",
+    "dev:mobile": "next dev --turbo -H 0.0.0.0 -p 3001",
     "lint": "eslint .",
     "start": "next start"
   },

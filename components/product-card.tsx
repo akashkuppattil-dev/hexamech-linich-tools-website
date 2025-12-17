@@ -1,27 +1,27 @@
 "use client"
 
-import type React from "react"
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Heart, Share2, MessageCircle, Lock } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { useCart } from "@/context/cart-context"
 import type { Product } from "@/lib/products"
+import { Heart, Lock, MessageCircle, Share2 } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import type React from "react"
+import { memo, useCallback, useEffect, useState } from "react"
 
 interface ProductCardProps {
   product: Product
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+function ProductCardComponent({ product }: ProductCardProps) {
   const [showShareMenu, setShowShareMenu] = useState(false)
   const { addToWishlist, removeFromWishlist, isInWishlist } = useCart()
 
   const inWishlist = isInWishlist(product.id)
 
-  const handleToggleWishlist = (e: React.MouseEvent) => {
+  const handleToggleWishlist = useCallback((e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
     if (inWishlist) {
@@ -35,9 +35,15 @@ export function ProductCard({ product }: ProductCardProps) {
         image: product.image,
       })
     }
-  }
+  }, [inWishlist, product.id, product.name, product.sku, product.price, product.image, addToWishlist, removeFromWishlist])
 
-  const productUrl = `${typeof window !== "undefined" ? window.location.origin : ""}/product/${product.id}`
+  const [productUrl, setProductUrl] = useState("")
+  
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setProductUrl(`${window.location.origin}/product/${product.id}`)
+    }
+  }, [product.id])
   const shareText = `Check out ${product.name} from Hexamech Linich Tools`
 
   const shareOptions = [
@@ -143,7 +149,8 @@ export function ProductCard({ product }: ProductCardProps) {
             onError={(e) => {
               e.currentTarget.src = "/placeholder.svg"
             }}
-            priority={false}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            loading="lazy"
           />
         </div>
 
@@ -210,3 +217,5 @@ export function ProductCard({ product }: ProductCardProps) {
     </Link>
   )
 }
+
+export const ProductCard = memo(ProductCardComponent)

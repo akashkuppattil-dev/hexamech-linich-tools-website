@@ -12,6 +12,13 @@ export const metadata = {
   description: "View detailed specifications of our automotive tools",
 }
 
+// Generate static params for all products at build time
+export async function generateStaticParams() {
+  return products.map((product) => ({
+    id: product.id,
+  }))
+}
+
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params
   const product = products.find((p) => p.id === resolvedParams.id)
@@ -43,7 +50,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                   fill
                   className="object-contain p-4 sm:p-6 md:p-8"
                   priority
-                  unoptimized
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
 

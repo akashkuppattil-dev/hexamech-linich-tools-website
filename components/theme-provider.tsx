@@ -1,35 +1,31 @@
 "use client"
 
 import * as React from "react"
-import { ThemeProvider as NextThemesProvider } from "next-themes"
+import { ThemeProvider as NextThemesProvider, useTheme as useNextTheme } from "next-themes"
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
-    <NextThemesProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+    <NextThemesProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
       {children}
     </NextThemesProvider>
   )
 }
 
 export function useTheme() {
-  const [theme, setThemeState] = React.useState<"light" | "dark">("light")
+  const { theme, setTheme } = useNextTheme()
   const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
     setMounted(true)
-    const savedTheme = document.documentElement.classList.contains("dark") ? "dark" : "light"
-    setThemeState(savedTheme)
   }, [])
 
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light"
-    setThemeState(newTheme)
-    document.documentElement.classList.toggle("dark")
-  }
+  const toggleTheme = React.useCallback(() => {
+    setTheme(theme === "light" ? "dark" : "light")
+  }, [theme, setTheme])
 
   if (!mounted) {
     return { theme: "light" as const, toggleTheme: () => {} }
   }
 
-  return { theme, toggleTheme }
+  return { theme: (theme as "light" | "dark") || "light", toggleTheme }
 }

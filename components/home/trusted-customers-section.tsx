@@ -24,7 +24,7 @@ const customers = [
 
 export function TrustedCustomersSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const itemsPerRow = 6
+  const itemsPerRow = typeof window !== "undefined" && window.innerWidth < 768 ? 2 : 6
   const totalRows = 2
   const itemsPerPage = itemsPerRow * totalRows
 

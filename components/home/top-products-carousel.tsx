@@ -10,7 +10,15 @@ import { getTopProducts } from "@/lib/products"
 export function TopProductsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const topProducts = getTopProducts(10)
-  const itemsToShow = 4 // reduced from 6 to 4 items displayed
+  const getItemsToShow = () => {
+    if (typeof window !== "undefined") {
+      if (window.innerWidth < 768) return 1
+      if (window.innerWidth < 1024) return 2
+      return 4
+    }
+    return 4
+  }
+  const [itemsToShow] = useState(getItemsToShow())
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % topProducts.length)
@@ -64,9 +72,7 @@ export function TopProductsCarousel() {
               <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
             </Button>
 
-            <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 py-6">
-              {" "}
-              {/* changed lg:grid-cols-6 to lg:grid-cols-4 */}
+            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 py-6">
               {getVisibleItems().map((product, index) => (
                 <div key={`${currentIndex}-${index}`} className="h-full">
                   <ProductCard product={product} />

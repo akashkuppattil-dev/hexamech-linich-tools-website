@@ -113,7 +113,8 @@ export function TestimonialsSlider() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
 
-  const itemsPerPage = 4
+  const itemsPerPageDesktop = 4
+  const itemsPerPageMobile = 1
   const totalItems = testimonials.length
 
   const goToSlide = useCallback(
@@ -139,9 +140,11 @@ export function TestimonialsSlider() {
     return () => clearInterval(timer)
   }, [nextSlide])
 
-  const visibleTestimonials = Array.from({ length: itemsPerPage }).map(
+  const visibleTestimonials = Array.from({ length: itemsPerPageDesktop }).map(
     (_, i) => testimonials[(currentIndex + i) % totalItems],
   )
+
+  const mobileTestimonial = testimonials[currentIndex]
 
   return (
     <section className="py-6 md:py-8 lg:py-10 bg-secondary/30">
@@ -152,52 +155,118 @@ export function TestimonialsSlider() {
           </h2>
         </div>
 
-        <div className="relative">
-          <div
-            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 transition-opacity duration-500 ${
-              isAnimating ? "opacity-0" : "opacity-100"
-            }`}
-          >
-            {visibleTestimonials.map((testimonial) => (
-              <Card key={testimonial.id} className="glass h-full flex flex-col">
-                <CardContent className="p-4 sm:p-5 md:p-6 flex flex-col h-full">
-                  <Quote className="h-6 w-6 sm:h-8 sm:w-8 text-primary/30 mb-3 sm:mb-4 shrink-0" />
+        <div
+          className={`hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 transition-opacity duration-500 ${
+            isAnimating ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          {visibleTestimonials.map((testimonial) => (
+            <Card key={testimonial.id} className="glass h-full flex flex-col">
+              <CardContent className="p-4 sm:p-5 md:p-6 flex flex-col h-full">
+                <Quote className="h-6 w-6 sm:h-8 sm:w-8 text-primary/30 mb-3 sm:mb-4 shrink-0" />
 
-                  <p className="text-foreground leading-relaxed mb-4 sm:mb-6 flex-grow text-xs sm:text-sm">
-                    "{testimonial.content}"
-                  </p>
+                <p className="text-foreground leading-relaxed mb-4 sm:mb-6 flex-grow text-xs sm:text-sm">
+                  "{testimonial.content}"
+                </p>
 
-                  <div className="flex items-center gap-3 mt-auto">
-                    <Image
-                      src={testimonial.image || "/placeholder.svg"}
-                      alt={testimonial.name}
-                      width={40}
-                      height={40}
-                      className="rounded-full object-cover sm:w-12 sm:h-12"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-foreground text-xs sm:text-sm truncate">{testimonial.name}</h4>
-                      <p className="text-[10px] sm:text-xs text-muted-foreground truncate">{testimonial.role}</p>
-                      <p className="text-[10px] sm:text-xs text-primary">{testimonial.location}</p>
-                    </div>
+                <div className="flex items-center gap-3 mt-auto">
+                  <Image
+                    src={testimonial.image || "/placeholder.svg"}
+                    alt={testimonial.name}
+                    width={40}
+                    height={40}
+                    className="rounded-full object-cover sm:w-12 sm:h-12"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-semibold text-foreground text-xs sm:text-sm truncate">{testimonial.name}</h4>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground truncate">{testimonial.role}</p>
+                    <p className="text-[10px] sm:text-xs text-primary">{testimonial.location}</p>
                   </div>
+                </div>
 
-                  <div className="flex gap-0.5 mt-2 sm:mt-3">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <svg key={i} className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-500 fill-current" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
+                <div className="flex gap-0.5 mt-2 sm:mt-3">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <svg key={i} className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-500 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="md:hidden">
+          <div className="flex items-center gap-3">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={prevSlide}
+              className="h-10 w-10 flex-shrink-0 bg-transparent"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </Button>
+
+            <Card className="glass h-full flex flex-col flex-1">
+              <CardContent className="p-4 flex flex-col h-full">
+                <Quote className="h-6 w-6 text-primary/30 mb-3 shrink-0" />
+
+                <p className="text-foreground leading-relaxed mb-4 flex-grow text-xs">"{mobileTestimonial.content}"</p>
+
+                <div className="flex items-center gap-3 mt-auto">
+                  <Image
+                    src={mobileTestimonial.image || "/placeholder.svg"}
+                    alt={mobileTestimonial.name}
+                    width={40}
+                    height={40}
+                    className="rounded-full object-cover w-10 h-10"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-semibold text-foreground text-xs truncate">{mobileTestimonial.name}</h4>
+                    <p className="text-[10px] text-muted-foreground truncate">{mobileTestimonial.role}</p>
+                    <p className="text-[10px] text-primary">{mobileTestimonial.location}</p>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+
+                <div className="flex gap-0.5 mt-2">
+                  {[...Array(mobileTestimonial.rating)].map((_, i) => (
+                    <svg key={i} className="h-3 w-3 text-yellow-500 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={nextSlide}
+              className="h-10 w-10 flex-shrink-0 bg-transparent"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </Button>
           </div>
 
+          <div className="flex justify-center gap-1.5 mt-4 flex-wrap">
+            {[...Array(totalItems)].map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`h-2 rounded-full transition-all ${
+                  index === currentIndex ? "bg-primary w-5" : "bg-muted-foreground/30 hover:bg-muted-foreground/50 w-2"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop navigation buttons and dots */}
+        <div className="hidden lg:flex">
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 hidden lg:flex bg-background shadow-lg h-10 w-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 bg-background shadow-lg h-10 w-10"
             onClick={prevSlide}
           >
             <ChevronLeft className="h-5 w-5" />
@@ -205,29 +274,20 @@ export function TestimonialsSlider() {
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 hidden lg:flex bg-background shadow-lg h-10 w-10"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 bg-background shadow-lg h-10 w-10"
             onClick={nextSlide}
           >
             <ChevronRight className="h-5 w-5" />
           </Button>
         </div>
 
-        <div className="flex justify-center gap-3 mt-4 sm:mt-6 lg:hidden">
-          <Button variant="outline" size="icon" onClick={prevSlide} className="h-9 w-9 bg-transparent">
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <Button variant="outline" size="icon" onClick={nextSlide} className="h-9 w-9 bg-transparent">
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
-
-        <div className="flex justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-6 flex-wrap">
+        <div className="flex justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-6 hidden lg:flex flex-wrap">
           {[...Array(totalItems)].map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
               className={`h-2 sm:h-3 rounded-full transition-all ${
-                index >= currentIndex && index < currentIndex + itemsPerPage
+                index >= currentIndex && index < currentIndex + itemsPerPageDesktop
                   ? "bg-primary w-5 sm:w-8"
                   : "bg-muted-foreground/30 hover:bg-muted-foreground/50 w-2 sm:w-3"
               }`}

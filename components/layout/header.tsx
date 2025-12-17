@@ -68,9 +68,8 @@ export function Header() {
                     unoptimized
                   />
                 </div>
-                <div className="hidden sm:block">
-                  {/* Improved typography with better font weight and sizing */}
-                  <h1 className="font-black text-lg sm:text-xl md:text-2xl text-foreground leading-tight tracking-tight">
+                <div className="block">
+                  <h1 className="font-black text-xs sm:text-lg sm:text-xl md:text-2xl text-foreground leading-tight tracking-tight">
                     Hexamech
                   </h1>
                   <p className="text-xs sm:text-sm text-primary font-bold leading-tight">Linich Tools</p>
@@ -184,45 +183,52 @@ export function Header() {
         </div>
       </header>
 
-      {/* MOBILE MENU - improved mobile menu layout and spacing */}
+      {/* MOBILE MENU - Left-sliding drawer with smooth animation and backdrop */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-[60] lg:hidden">
+        <div className="fixed inset-0 z-[60] lg:hidden animate-in fade-in duration-200">
           <div
-            className="absolute inset-0 bg-background/98 backdrop-blur-2xl"
+            className="absolute inset-0 bg-black/50 transition-opacity duration-300 ease-out"
             onClick={() => setMobileMenuOpen(false)}
+            role="presentation"
           />
-          <div className="relative h-full flex flex-col">
-            <div className="flex items-center justify-between px-3 sm:px-4 py-3 border-b bg-card">
-              <h2 className="font-bold text-sm sm:text-base text-foreground">Hexamech Linich</h2>
+          <div className="absolute left-0 top-0 bottom-0 w-64 sm:w-72 bg-card shadow-2xl flex flex-col animate-in slide-in-from-left duration-300 ease-out">
+            <div className="flex items-center justify-between px-4 py-4 border-b border-border/50 bg-card">
+              <h2 className="font-bold text-lg text-foreground">Menu</h2>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-1 text-muted-foreground hover:bg-secondary rounded-lg"
+                className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-all duration-200 ease-out"
+                aria-label="Close menu"
               >
-                <X className="h-4 w-4 sm:h-5 sm:w-5" />
+                <X className="h-5 w-5" />
               </button>
             </div>
 
-            <nav className="flex-1 flex flex-col justify-start gap-0.5 p-2 sm:p-3">
+            <nav className="flex-1 flex flex-col px-2 py-3 overflow-y-auto">
               {navLinks.map((link) => {
                 const Icon = link.icon
+                const isActive = pathname === link.href
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={handleNavClick}
-                    className="flex items-center gap-3 px-3 sm:px-4 py-3 text-sm sm:text-base font-semibold rounded-lg hover:bg-secondary text-foreground transition-colors"
+                    className={`flex items-center gap-3 px-4 py-3 text-base font-semibold rounded-lg transition-all duration-200 ease-out ${
+                      isActive
+                        ? "bg-primary/15 text-primary border-l-4 border-primary"
+                        : "text-foreground hover:bg-secondary/50"
+                    }`}
                   >
-                    <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+                    <Icon className={`h-5 w-5 flex-shrink-0 ${isActive ? "text-primary" : "text-muted-foreground"}`} />
                     {link.label}
                   </Link>
                 )
               })}
             </nav>
 
-            <div className="border-t p-3 sm:p-4 space-y-2">
+            <div className="border-t border-border/50 p-4 space-y-3 bg-card">
               <Button
                 size="lg"
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm sm:text-base font-semibold py-2.5 h-10"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2.5 h-10 transition-all duration-200 ease-out"
                 onClick={() => {
                   window.open(
                     "https://wa.me/917510638693?text=Hi%20Hexamech%2C%20I%20need%20a%20bulk%20quote",

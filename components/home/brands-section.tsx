@@ -22,7 +22,7 @@ const brands = [
 
 export function BrandsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const brandsPerRow = 6
+  const brandsPerRow = typeof window !== "undefined" && window.innerWidth < 768 ? 2 : 6
   const totalRows = 2
 
   useEffect(() => {
@@ -106,7 +106,7 @@ export function BrandsSection() {
             <ChevronLeft className="h-5 w-5" />
           </Button>
 
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 md:gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 md:gap-5">
             {visibleBrands.map((brand, index) => (
               <Card
                 key={index}

@@ -11,7 +11,7 @@ import { ShopFilters } from "@/components/shop/shop-filters"
 import { products, categories, brands } from "@/lib/products"
 import { Badge } from "@/components/ui/badge"
 
-const ITEMS_PER_PAGE_MOBILE = 6
+const ITEMS_PER_PAGE_MOBILE = 1
 const ITEMS_PER_PAGE_DESKTOP = 12
 
 type SortOption = "popularity" | "latest" | "price-low" | "price-high" | "rating"
@@ -298,8 +298,8 @@ export function ShopContent() {
                 gridCols === 3
                   ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
                   : gridCols === 6
-                    ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
-                    : "grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                    ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
+                    : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
               }`}
             >
               {paginatedProducts.map((product) => (
@@ -355,14 +355,6 @@ export function ShopContent() {
                 disabled={currentPage === totalPages}
               >
                 Next
-              </Button>
-            </div>
-          )}
-
-          {currentPage < totalPages && (
-            <div className="text-center mt-6">
-              <Button variant="outline" size="lg" onClick={() => setCurrentPage((p) => p + 1)} className="px-8">
-                Load More Products
               </Button>
             </div>
           )}

@@ -38,15 +38,16 @@ export function HeroSection() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl">
           <div className="flex flex-col xs:flex-row flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
-            <Badge variant="secondary" className="glass px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm w-fit">
+            {/* Show badges on mobile */}
+            <Badge variant="secondary" className="glass px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm w-fit flex">
               <Shield className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary" />
               GST Verified – 32CWVPM3137R1ZP
             </Badge>
-            <Badge variant="secondary" className="glass px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm w-fit">
+            <Badge variant="secondary" className="glass px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm w-fit flex">
               <BadgeCheck className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-accent" />
               B2B Wholesale Supplier
             </Badge>
-            <Badge variant="secondary" className="glass px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm w-fit">
+            <Badge variant="secondary" className="glass px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm w-fit flex">
               <Award className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary" />
               Trusted by 4,000+ Workshops
             </Badge>

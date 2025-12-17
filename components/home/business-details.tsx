@@ -1,7 +1,13 @@
 "use client"
 
-import { Building2, Calendar, Users, Receipt, TrendingUp, BadgeCheck } from "lucide-react"
+import { Building2, Calendar, Users, Receipt, TrendingUp, BadgeCheck, ChevronLeft, ChevronRight } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { useState, useCallback } from "react"
+
+const getIconComponent = (IconComponent: any) => {
+  return <IconComponent className="h-5 w-5" />
+}
 
 const businessDetails = [
   {
@@ -43,6 +49,16 @@ const businessDetails = [
 ]
 
 export function BusinessDetails() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const goToPrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + businessDetails.length) % businessDetails.length)
+  }, [])
+
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % businessDetails.length)
+  }, [])
+
   return (
     <section className="py-8 md:py-10 lg:py-12 bg-secondary/30">
       <div className="container mx-auto px-4">
@@ -53,20 +69,65 @@ export function BusinessDetails() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {businessDetails.map((detail, index) => (
-            <Card key={index} className="glass hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-4 sm:p-6 flex items-start gap-4">
-                <div className={`p-3 rounded-lg bg-secondary/50 ${detail.color}`}>
-                  <detail.icon className="h-5 w-5 sm:h-6 sm:w-6" />
-                </div>
-                <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground mb-1">{detail.label}</p>
-                  <p className="font-semibold text-sm sm:text-base text-foreground">{detail.value}</p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          {businessDetails.map((detail, index) => {
+            const IconComponent = detail.icon
+            return (
+              <Card key={index} className="glass hover:shadow-lg transition-all duration-300">
+                <CardContent className="p-4 sm:p-6 flex items-start gap-4">
+                  <div className={`p-3 rounded-lg bg-secondary/50 ${detail.color}`}>
+                    <IconComponent className="h-5 w-5 sm:h-6 sm:w-6" />
+                  </div>
+                  <div>
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-1">{detail.label}</p>
+                    <p className="font-semibold text-sm sm:text-base text-foreground">{detail.value}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
+
+        <div className="md:hidden">
+          <div className="flex items-center gap-3">
+            <Button variant="outline" size="icon" onClick={goToPrev} className="h-10 w-10 flex-shrink-0 bg-transparent">
+              <ChevronLeft className="h-5 w-5" />
+            </Button>
+
+            {(() => {
+              const currentDetail = businessDetails[currentIndex]
+              const IconComponent = currentDetail.icon
+              return (
+                <Card className="glass flex-1 hover:shadow-lg transition-all">
+                  <CardContent className="p-4 flex items-start gap-4">
+                    <div className={`p-3 rounded-lg bg-secondary/50 ${currentDetail.color}`}>
+                      <IconComponent className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-1">{currentDetail.label}</p>
+                      <p className="font-semibold text-sm text-foreground">{currentDetail.value}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })()}
+
+            <Button variant="outline" size="icon" onClick={goToNext} className="h-10 w-10 flex-shrink-0 bg-transparent">
+              <ChevronRight className="h-5 w-5" />
+            </Button>
+          </div>
+
+          <div className="flex justify-center gap-1.5 mt-4">
+            {businessDetails.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`h-2 rounded-full transition-all ${
+                  index === currentIndex ? "bg-primary w-5" : "bg-muted-foreground/30 w-2"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

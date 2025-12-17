@@ -42,6 +42,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
                   fill
                   className="object-contain p-4 sm:p-6 md:p-8"
                   priority
+                  unoptimized
                 />
               </div>
 
@@ -99,7 +100,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
                   </div>
                   <div className="flex justify-between">
                     <span className="text-xs sm:text-sm text-muted-foreground">Status:</span>
-                    <Badge variant={product.inStock ? "default" : "secondary"} className="text-xs">
+                    <Badge variant={product.inStock ? "default" : "secondary"} className="text-xs py-0 px-2">
                       {product.inStock ? "In Stock" : "Out of Stock"}
                     </Badge>
                   </div>

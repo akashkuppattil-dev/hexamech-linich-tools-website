@@ -12,8 +12,9 @@ export const metadata = {
   description: "View detailed specifications of our automotive tools",
 }
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
-  const product = products.find((p) => p.id === params.id)
+export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params
+  const product = products.find((p) => p.id === resolvedParams.id)
 
   if (!product) {
     notFound()

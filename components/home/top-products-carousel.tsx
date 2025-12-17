@@ -1,24 +1,60 @@
 "use client"
 
-import { useState } from "react"
+import type React from "react"
+
+import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProductCard } from "@/components/product-card"
 import { getTopProducts } from "@/lib/products"
 
 export function TopProductsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [itemsToShow, setItemsToShow] = useState(4)
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
+  const carouselRef = useRef<HTMLDivElement>(null)
+
   const topProducts = getTopProducts(10)
-  const getItemsToShow = () => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth < 768) return 1
-      if (window.innerWidth < 1024) return 2
-      return 4
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (typeof window !== "undefined") {
+        if (window.innerWidth < 768) setItemsToShow(1)
+        else if (window.innerWidth < 1024) setItemsToShow(2)
+        else setItemsToShow(4)
+      }
     }
-    return 4
+
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
   }
-  const [itemsToShow] = useState(getItemsToShow())
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    touchEndX.current = e.changedTouches[0].clientX
+    handleSwipe()
+  }
+
+  const handleSwipe = () => {
+    const difference = touchStartX.current - touchEndX.current
+    const threshold = 50
+
+    if (Math.abs(difference) > threshold) {
+      if (difference > 0) {
+        // Swipe left (move to next)
+        goToNext()
+      } else {
+        // Swipe right (move to previous)
+        goToPrev()
+      }
+    }
+  }
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % topProducts.length)
@@ -59,37 +95,19 @@ export function TopProductsCarousel() {
         </div>
 
         <div className="relative">
-          {/* Navigation Buttons and Product Grid */}
-          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-            {/* Previous Button */}
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={goToPrev}
-              className="h-10 w-10 md:h-12 md:w-12 flex-shrink-0 bg-transparent"
-              aria-label="Previous products"
-            >
-              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
-            </Button>
-
-            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 py-6">
+          <div
+            ref={carouselRef}
+            className="w-full touch-pan-y cursor-grab active:cursor-grabbing"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 py-6">
               {getVisibleItems().map((product, index) => (
                 <div key={`${currentIndex}-${index}`} className="h-full">
                   <ProductCard product={product} />
                 </div>
               ))}
             </div>
-
-            {/* Next Button */}
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={goToNext}
-              className="h-10 w-10 md:h-12 md:w-12 flex-shrink-0 bg-transparent"
-              aria-label="Next products"
-            >
-              <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
-            </Button>
           </div>
 
           {/* Indicator dots */}

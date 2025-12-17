@@ -183,7 +183,7 @@ export function Header() {
         </div>
       </header>
 
-      {/* MOBILE MENU - Left-sliding drawer with smooth animation and backdrop */}
+      {/* MOBILE MENU - Right-sliding drawer instead of left */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-[60] lg:hidden animate-in fade-in duration-200">
           <div
@@ -191,7 +191,7 @@ export function Header() {
             onClick={() => setMobileMenuOpen(false)}
             role="presentation"
           />
-          <div className="absolute left-0 top-0 bottom-0 w-64 sm:w-72 bg-card shadow-2xl flex flex-col animate-in slide-in-from-left duration-300 ease-out">
+          <div className="absolute right-0 top-0 bottom-0 w-64 sm:w-72 bg-card shadow-2xl flex flex-col animate-in slide-in-from-right duration-300 ease-out">
             <div className="flex items-center justify-between px-4 py-4 border-b border-border/50 bg-card">
               <h2 className="font-bold text-lg text-foreground">Menu</h2>
               <button

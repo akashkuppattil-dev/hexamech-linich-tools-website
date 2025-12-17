@@ -79,3 +79,5 @@ export function StatsCounter({ stat }: StatProps) {
     </div>
   )
 }
+
+export default StatsCounter

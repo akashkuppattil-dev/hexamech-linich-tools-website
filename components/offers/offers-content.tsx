@@ -1,4 +1,5 @@
 "use client"
+import { useState } from "react"
 import { Tag, Percent, Flame, Zap, Star, TrendingUp, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -9,6 +10,39 @@ const offerProducts = getTopProducts(6) // Get only 6 top products
 
 export function OffersContent() {
   const hotDeals = offerProducts.slice(0, 6) // Use all 6 products as featured products
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [touchStart, setTouchStart] = useState(0)
+  const [touchEnd, setTouchEnd] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX)
+    setIsDragging(true)
+  }
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    setIsDragging(false)
+    if (!touchStart || !touchEnd) return
+
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+
+    if (isLeftSwipe) {
+      setCurrentIndex((prev) => (prev + 1) % hotDeals.length)
+    }
+    if (isRightSwipe) {
+      setCurrentIndex((prev) => (prev - 1 + hotDeals.length) % hotDeals.length)
+    }
+  }
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index)
+  }
 
   return (
     <div>
@@ -108,10 +142,43 @@ export function OffersContent() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Desktop Grid - unchanged */}
+            <div className="hidden lg:grid grid-cols-3 gap-6">
               {hotDeals.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
+            </div>
+
+            <div className="lg:hidden">
+              <div
+                className="cursor-grab active:cursor-grabbing select-none"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                <div className="flex justify-center">
+                  <div className="w-full max-w-sm">
+                    <ProductCard key={hotDeals[currentIndex].id} product={hotDeals[currentIndex]} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Indicator Dots */}
+              <div className="flex justify-center gap-2 mt-6">
+                {hotDeals.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`h-3 rounded-full transition-all duration-300 ${
+                      index === currentIndex ? "bg-primary w-8" : "bg-primary/30 hover:bg-primary/60 w-3"
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* Swipe Instructions */}
+              <p className="text-center text-sm text-muted-foreground mt-4">Swipe left or right to browse products</p>
             </div>
           </div>
         </section>

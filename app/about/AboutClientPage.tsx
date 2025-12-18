@@ -124,11 +124,11 @@ export default function AboutClientPage() {
 
       {/* WHO WE ARE */}
       <section className="py-8 md:py-12">
-        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
+        <div className="container mx-auto px-4 grid lg:grid-cols-10 gap-8 md:gap-12 items-center">
+          <div className="lg:col-span-7">
             <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">Our Identity</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">Who We Are</h2>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8">Who We Are</h2>
+            <div className="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
               <p>
                 <strong className="text-foreground">Hexamech Linich Tools</strong> was founded in 2023 in Chulliparamba,
                 near Farook College, Kerala — with a single mission: to provide automotive workshops with reliable
@@ -148,15 +148,15 @@ export default function AboutClientPage() {
           </div>
 
           {/* LOGO */}
-          <div className="relative">
-            <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/10 via-secondary to-accent/10 flex items-center justify-center p-8">
+          <div className="lg:col-span-3 relative">
+            <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/10 via-secondary to-accent/10 flex items-center justify-center p-4 md:p-6">
               <Image
                 src="/images/logo.jpg"
                 alt="Hexamech Linich Tools Logo"
-                width={600}
-                height={600}
+                width={300}
+                height={300}
                 className="object-contain drop-shadow-2xl hover:scale-110 transition-transform duration-300"
-                sizes="(max-width: 768px) 100vw, 600px"
+                sizes="(max-width: 768px) 100vw, 300px"
                 priority
               />
             </div>
@@ -248,7 +248,7 @@ export default function AboutClientPage() {
           </div>
 
           {/* Desktop Stack */}
-          <div className="hidden md:space-y-12">
+          <div className="space-y-12 hidden md:block">
             {founders.map((founder, idx) => (
               <div
                 key={founder.name}

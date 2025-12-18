@@ -1,11 +1,11 @@
 "use client"
 
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
-import { categories } from "@/lib/products"
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { categories } from "@/lib/products"
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
 import { useState } from "react"
 
 const categoryImages: Record<string, string> = {
@@ -91,7 +91,6 @@ export function CategoriesGrid() {
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
                     </div>
 
                     <CardContent className="p-2 sm:p-3 relative">

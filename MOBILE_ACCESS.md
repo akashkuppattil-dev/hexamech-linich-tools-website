@@ -79,3 +79,6 @@ The server is already configured to be accessible on your network. Just:
 - **Local Access**: http://localhost:3001
 - **Mobile Access**: http://YOUR_IP:3001
 
+
+
+

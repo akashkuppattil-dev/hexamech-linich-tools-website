@@ -115,19 +115,7 @@ export function CategoriesGrid() {
             </Button>
           </div>
 
-          {/* Indicator dots */}
-          <div className="flex justify-center gap-2 mt-6">
-            {categories.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`h-2 rounded-full transition-all ${
-                  index === currentIndex ? "w-8 bg-primary" : "w-2 bg-border"
-                }`}
-                aria-label={`Go to category ${index + 1}`}
-              />
-            ))}
-          </div>
+          
         </div>
       </div>
     </section>

@@ -1,9 +1,9 @@
 "use client"
 
-import { Building2, Calendar, Users, Receipt, TrendingUp, BadgeCheck, ChevronLeft, ChevronRight } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { useState, useCallback } from "react"
+import { Card, CardContent } from "@/components/ui/card"
+import { BadgeCheck, Building2, Calendar, ChevronLeft, ChevronRight, Receipt, TrendingUp, Users } from "lucide-react"
+import { useCallback, useState } from "react"
 
 const getIconComponent = (IconComponent: any) => {
   return <IconComponent className="h-5 w-5" />
@@ -25,7 +25,7 @@ const businessDetails = [
   {
     icon: TrendingUp,
     label: "Annual Turnover",
-    value: "1.5 - 5 Cr",
+    value: "1.5 - 10 Cr",
     color: "text-accent",
   },
   {
@@ -37,7 +37,7 @@ const businessDetails = [
   {
     icon: Users,
     label: "Total Number of Employees",
-    value: "Upto 10 People",
+    value: "Upto 25+ People",
     color: "text-primary",
   },
   {

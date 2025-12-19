@@ -1,15 +1,15 @@
 "use client"
 
-import { useState, useMemo, useEffect } from "react"
-import { useSearchParams } from "next/navigation"
-import { Filter, Grid3X3, LayoutGrid, SlidersHorizontal, Package, Award, MessageCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ProductCard } from "@/components/product-card"
 import { ShopFilters } from "@/components/shop/shop-filters"
-import { products, categories, brands } from "@/lib/products"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { brands, categories, products } from "@/lib/products"
+import { Award, Filter, Grid3X3, LayoutGrid, MessageCircle, Package, SlidersHorizontal } from "lucide-react"
+import { useSearchParams } from "next/navigation"
+import { useEffect, useMemo, useState } from "react"
 
 const ITEMS_PER_PAGE_MOBILE = 1
 const ITEMS_PER_PAGE_DESKTOP = 12
@@ -20,7 +20,6 @@ export function ShopContent() {
   const searchParams = useSearchParams()
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedBrands, setSelectedBrands] = useState<string[]>([])
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 50000])
   const [availability, setAvailability] = useState<string[]>([])
   const [sortBy, setSortBy] = useState<SortOption>("popularity")
   const [gridCols, setGridCols] = useState<3 | 4 | 6>(4)
@@ -77,8 +76,6 @@ export function ShopContent() {
       filtered = filtered.filter((p) => selectedBrands.includes(p.brand))
     }
 
-    filtered = filtered.filter((p) => p.price >= priceRange[0] && p.price <= priceRange[1])
-
     if (availability.length > 0) {
       if (availability.includes("in-stock") && !availability.includes("out-of-stock")) {
         filtered = filtered.filter((p) => p.inStock)
@@ -91,23 +88,19 @@ export function ShopContent() {
     }
 
     switch (sortBy) {
-      case "price-low":
-        filtered.sort((a, b) => a.price - b.price)
-        break
-      case "price-high":
-        filtered.sort((a, b) => b.price - a.price)
-        break
       case "latest":
         filtered.sort((a, b) => Number(b.id) - Number(a.id))
         break
       case "rating":
       case "popularity":
+      case "price-low":
+      case "price-high":
       default:
         break
     }
 
     return filtered
-  }, [selectedCategories, selectedBrands, priceRange, availability, sortBy, searchParams])
+  }, [selectedCategories, selectedBrands, availability, sortBy, searchParams])
 
   const itemsPerPage = isMobile ? ITEMS_PER_PAGE_MOBILE : ITEMS_PER_PAGE_DESKTOP
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
@@ -116,7 +109,6 @@ export function ShopContent() {
   const clearFilters = () => {
     setSelectedCategories([])
     setSelectedBrands([])
-    setPriceRange([0, 50000])
     setAvailability([])
     setCurrentPage(1)
   }
@@ -124,8 +116,7 @@ export function ShopContent() {
   const activeFiltersCount =
     selectedCategories.length +
     selectedBrands.length +
-    availability.length +
-    (priceRange[0] > 0 || priceRange[1] < 50000 ? 1 : 0)
+    availability.length
 
   return (
     <div className="container mx-auto px-4 py-4 md:py-6">
@@ -185,8 +176,6 @@ export function ShopContent() {
             setSelectedCategories={setSelectedCategories}
             selectedBrands={selectedBrands}
             setSelectedBrands={setSelectedBrands}
-            priceRange={priceRange}
-            setPriceRange={setPriceRange}
             availability={availability}
             setAvailability={setAvailability}
             onClearFilters={clearFilters}
@@ -216,8 +205,6 @@ export function ShopContent() {
                   setSelectedCategories={setSelectedCategories}
                   selectedBrands={selectedBrands}
                   setSelectedBrands={setSelectedBrands}
-                  priceRange={priceRange}
-                  setPriceRange={setPriceRange}
                   availability={availability}
                   setAvailability={setAvailability}
                   onClearFilters={clearFilters}

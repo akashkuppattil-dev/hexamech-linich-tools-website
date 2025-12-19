@@ -1,10 +1,10 @@
 "use client"
 
-import { X } from "lucide-react"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { X } from "lucide-react"
 
 interface Category {
   id: string
@@ -18,8 +18,6 @@ interface ShopFiltersProps {
   setSelectedCategories: (categories: string[]) => void
   selectedBrands: string[]
   setSelectedBrands: (brands: string[]) => void
-  priceRange: [number, number]
-  setPriceRange: (range: [number, number]) => void
   availability: string[]
   setAvailability: (availability: string[]) => void
   onClearFilters: () => void
@@ -33,8 +31,6 @@ export function ShopFilters({
   setSelectedCategories,
   selectedBrands,
   setSelectedBrands,
-  priceRange,
-  setPriceRange,
   availability,
   setAvailability,
   onClearFilters,

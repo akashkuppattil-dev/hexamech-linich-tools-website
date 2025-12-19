@@ -8,8 +8,8 @@ import Image from "next/image"
 import React, { useState } from "react"
 
 const stats = [
-  { label: "Annual Turnover", value: "1.5-5", suffix: "Cr", iconName: "Award" as const },
-  { label: "Team Strength", value: "10", suffix: "+", iconName: "Users" as const },
+  { label: "Annual Turnover", value: "1.5-10", suffix: "Cr", iconName: "Award" as const },
+  { label: "Team Strength", value: "25+", suffix: "+", iconName: "Users" as const },
   { label: "Tools & SKUs", value: "1000", suffix: "+", iconName: "Package" as const },
   { label: "Workshops Served", value: "4000", suffix: "+", iconName: "ThumbsUp" as const },
 ]
@@ -55,21 +55,17 @@ export default function AboutClientPage() {
   const founders = [
     {
       name: "Jithin Mullasseri Chulliyil",
-      role: "Co-Founder of Hexamech | Chief Executive Officer",
+      role: "Co-Founder of Hexamech",
       image: "/images/jithin-mullasseri.jpg",
-      bio: "Jithin is the driving force behind Hexamech's vision and strategic direction. With a deep-rooted passion for automotive technology and years of hands-on experience in the industry, he understands exactly what workshops need to operate at their best. As CEO, Jithin oversees supplier partnerships, brand selection, and quality assurance — personally ensuring that every tool Hexamech supplies meets the rigorous standards demanded by professional mechanics. His commitment to building trust-based relationships with workshops across India has been instrumental in Hexamech's rapid growth and reputation for reliability.",
     },
     {
       name: "Lineesh TP",
-      role: "Co-Founder of Hexamech | Sales & Business Development",
-      image: "/images/lineesh-tp.jpg",
-      bio: "Lineesh brings exceptional expertise in sales strategy and dealer development to Hexamech. His ability to understand market dynamics and customer needs has been pivotal in building Hexamech's extensive network of workshop partners. He leads all sales initiatives, dealer engagement programs, and regional expansion efforts — ensuring Hexamech stays closely connected to the real-world requirements of automotive professionals. Lineesh's focus on sustainable growth and long-term partnerships has helped Hexamech establish a loyal customer base that trusts us as their go-to tools supplier.",
-    },
+      role: "Co-Founder of Hexamech",
+      image: "/images/lineesh-tp.jpg", },
     {
       name: "Shaibeesh TP",
-      role: "Co-Founder of Hexamech | Operations & Supply Chain",
+      role: "Co-Founder of Hexamech",
       image: "/images/shaibeesh-tp.jpg",
-      bio: "Shaibeesh is the operational backbone of Hexamech, ensuring that every order is fulfilled accurately, on time, and with the utmost care. His expertise in logistics and supply chain management keeps Hexamech running like a well-oiled machine. He manages inventory planning, warehouse operations, vendor coordination, and delivery logistics — making sure workshops receive their tools exactly when they need them. Shaibeesh's operational discipline and attention to detail enable Hexamech to deliver consistently at scale, maintaining our reputation for reliability across India.",
     },
   ]
 
@@ -267,8 +263,7 @@ export default function AboutClientPage() {
                 <div className={`md:col-span-2 text-center md:text-left ${idx % 2 === 1 ? "md:order-1" : ""}`}>
                   <h3 className="text-2xl font-bold text-foreground">{founder.name}</h3>
                   <p className="text-primary font-semibold mb-4">{founder.role}</p>
-                  <p className="text-muted-foreground leading-relaxed">{founder.bio}</p>
-                </div>
+              </div>
               </div>
             ))}
           </div>
@@ -294,9 +289,7 @@ export default function AboutClientPage() {
                 </div>
                 <h3 className="text-lg font-bold text-foreground text-center">{founders[foundersIndex].name}</h3>
                 <p className="text-primary font-semibold text-center text-sm mb-3">{founders[foundersIndex].role}</p>
-                <p className="text-muted-foreground text-sm leading-relaxed text-center">
-                  {founders[foundersIndex].bio}
-                </p>
+        
               </div>
 
               <button

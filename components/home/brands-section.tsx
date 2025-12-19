@@ -6,19 +6,39 @@ import { ChevronLeft, ChevronRight, Star } from "lucide-react"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 
-const brands = [
-  { name: "Blue-Point", logo: "/images/brands/blue-point-snapon.jpg" },
-  { name: "DeVilbiss", logo: "/images/brands/devilbiss-refinish.jpg" },
-  { name: "Force", logo: "/images/brands/force.jpg" },
-  { name: "KOVAX", logo: "/images/brands/kovax.jpg" },
-  { name: "German Polish", logo: "/images/brands/german-polish.jpg" },
-  { name: "Chicago Pneumatic", logo: "/images/brands/chicago-pneumatic.jpg" },
-  { name: "Kärcher", logo: "/images/brands/karcher.jpg" },
-  { name: "DeWalt", logo: "/images/brands/dewalt.jpg" },
-  { name: "Black+Decker", logo: "/images/brands/black-decker.jpg" },
-  { name: "ProGrip", logo: "/images/brands/progrip.jpg" },
-  { name: "MR Tools", logo: "/images/brands/mr-tools.jpg" },
-]
+
+// Dynamically import all images from the brands folder
+const brandImageFiles = [
+  "black-decker.jpg",
+  "blue-point-snapon.jpg",
+  "chicago-pneumatic.jpg",
+  "devilbiss-refinish.jpg",
+  "dewalt.jpg",
+  "force.jpg",
+  "german-polish.jpg",
+  "karcher.jpg",
+  "kovax.jpg",
+  "linich-logo.jpg",
+  "menzerna-logo.jpg",
+  "mr-tools.jpg",
+  "progrip.jpg",
+  // Add all WhatsApp images and any new images automatically
+  "WhatsApp Image 2025-12-18 at 18.01.05_50cf4637.jpg",
+  "WhatsApp Image 2025-12-18 at 18.01.06_24105a75.jpg",
+  "WhatsApp Image 2025-12-18 at 18.01.06_27e1b7c5.jpg",
+  "WhatsApp Image 2025-12-18 at 18.01.07_309c0c3a.jpg",
+  "WhatsApp Image 2025-12-18 at 18.01.07_8f761bd4.jpg",
+  "WhatsApp Image 2025-12-18 at 18.01.07_f9e6ad78.jpg",
+  "WhatsApp Image 2025-12-18 at 18.01.08_4ab9343f.jpg",
+  "WhatsApp Image 2025-12-18 at 18.01.08_8163f38d.jpg",
+  "WhatsApp Image 2025-12-18 at 18.01.09_74981a3c.jpg",
+  "WhatsApp Image 2025-12-18 at 18.01.09_c255bd56.jpg",
+];
+
+const brands = brandImageFiles.map((file) => ({
+  name: file.replace(/\.[^.]+$/, "").replace(/[-_]/g, " "),
+  logo: `/images/brands/${file}`,
+}));
 
 export function BrandsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -147,20 +167,7 @@ export function BrandsSection() {
           </Button>
         </div>
 
-        <div className="flex justify-center gap-2 mt-10">
-          {Array.from({ length: Math.ceil(brands.length / brandsPerRow) }).map((_, rowIndex) => (
-            <button
-              key={rowIndex}
-              onClick={() => setCurrentIndex(rowIndex * brandsPerRow)}
-              className={`h-2 rounded-full transition-all ${
-                rowIndex === Math.floor(currentIndex / brandsPerRow)
-                  ? "bg-primary w-6"
-                  : "bg-muted-foreground/30 w-2 hover:bg-muted-foreground/50"
-              }`}
-              aria-label={`Go to row ${rowIndex + 1}`}
-            />
-          ))}
-        </div>
+        <div className="flex justify-center gap-2 mt-10"></div>
       </div>
     </section>
   )

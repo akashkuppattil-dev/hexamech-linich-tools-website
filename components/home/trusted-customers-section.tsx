@@ -110,20 +110,6 @@ export function TrustedCustomersSection() {
           </Button>
         </div>
 
-        <div className="flex justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8">
-          {Array.from({ length: Math.ceil(customers.length / itemsPerRow) }).map((_, rowIndex) => (
-            <button
-              key={rowIndex}
-              onClick={() => setCurrentIndex(rowIndex * itemsPerRow)}
-              className={`h-1.5 sm:h-2 rounded-full transition-all ${
-                rowIndex === Math.floor(currentIndex / itemsPerRow)
-                  ? "bg-primary w-4 sm:w-6"
-                  : "bg-muted-foreground/30 w-1.5 sm:w-2 hover:bg-muted-foreground/50"
-              }`}
-              aria-label={`Go to row ${rowIndex + 1}`}
-            />
-          ))}
-        </div>
       </div>
     </section>
   )

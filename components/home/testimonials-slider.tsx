@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
-import Image from "next/image"
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
+import Image from "next/image"
+import { useCallback, useEffect, useState } from "react"
 
 const testimonials = [
   {
@@ -281,19 +281,6 @@ export function TestimonialsSlider() {
           </Button>
         </div>
 
-        <div className="flex justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-6 hidden lg:flex flex-wrap">
-          {[...Array(totalItems)].map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`h-2 sm:h-3 rounded-full transition-all ${
-                index >= currentIndex && index < currentIndex + itemsPerPageDesktop
-                  ? "bg-primary w-5 sm:w-8"
-                  : "bg-muted-foreground/30 hover:bg-muted-foreground/50 w-2 sm:w-3"
-              }`}
-            />
-          ))}
-        </div>
       </div>
     </section>
   )

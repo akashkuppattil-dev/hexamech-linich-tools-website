@@ -40,59 +40,49 @@ export function TrustedCustomersSection() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + itemsPerRow) % customers.length)
-    }, 4000)
+    }, 5000)
     return () => clearInterval(timer)
   }, [itemsPerRow])
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - itemsPerRow + customers.length) % customers.length)
-  }
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + itemsPerRow) % customers.length)
-  }
+  const handlePrev = () => setCurrentIndex((prev) => (prev - itemsPerRow + customers.length) % customers.length)
+  const handleNext = () => setCurrentIndex((prev) => (prev + itemsPerRow) % customers.length)
 
   const visibleCustomers = Array.from({ length: itemsPerPage }).map(
     (_, i) => customers[(currentIndex + i) % customers.length],
   )
 
   return (
-    <section className="py-10 sm:py-12 md:py-16 lg:py-24 bg-gradient-to-b from-background to-secondary/10">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-6 sm:mb-8 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2 md:mb-4">
-            Our Trusted Customers
-          </h2>
-          <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
-            Trusted by leading automotive dealerships and service networks across South India.
-          </p>
-        </div>
+    <section className="py-12 sm:py-16 bg-white dark:bg-zinc-950 transition-colors">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-3xl sm:text-4xl font-black text-zinc-900 dark:text-white mb-4 tracking-tighter">
+          Trusted by Industry Leaders
+        </h2>
+        <p className="text-sm sm:text-base text-zinc-500 dark:text-zinc-400 font-medium max-w-xl mx-auto mb-10">
+          Supplying the largest automotive service networks and dealerships across South India.
+        </p>
 
-        <div className="relative px-8 sm:px-12 md:px-16">
+        <div className="relative group/customers">
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-background shadow-lg z-10 hover:bg-primary hover:text-white transition-colors h-8 w-8 sm:h-10 sm:w-10"
             onClick={handlePrev}
-            aria-label="Previous customers"
+            className="absolute -left-2 xl:-left-12 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-white dark:bg-zinc-800 shadow-md border border-zinc-100 dark:border-zinc-700 opacity-0 group-hover/customers:opacity-100 hover:bg-primary hover:text-white"
           >
-            <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+            <ChevronLeft className="h-5 w-5" />
           </Button>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-6">
             {visibleCustomers.map((customer, index) => (
               <Card
                 key={index}
-                className="aspect-square flex items-center justify-center p-2 sm:p-3 md:p-4 bg-white/50 dark:bg-secondary/30 border-primary/20 hover:border-primary/50 hover:bg-white/70 dark:hover:bg-secondary/50 transition-all duration-300 hover:shadow-lg"
+                className="aspect-[3/2] flex items-center justify-center p-3 bg-white dark:bg-zinc-900 border-none shadow-sm hover:shadow-lg transition-all group/customer-card rounded-xl"
               >
-                <div className="w-full h-full relative flex items-center justify-center overflow-hidden">
+                <div className="w-full h-full relative opacity-70 group-hover/customer-card:opacity-100 transition-opacity">
                   <Image
                     src={customer.logo || "/placeholder.svg"}
                     alt={customer.name}
                     fill
-                    className="object-contain p-1 sm:p-2 scale-125"
-                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 16vw"
-                    loading="lazy"
+                    className="object-contain"
                   />
                 </div>
               </Card>
@@ -100,16 +90,14 @@ export function TrustedCustomersSection() {
           </div>
 
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-background shadow-lg z-10 hover:bg-primary hover:text-white transition-colors h-8 w-8 sm:h-10 sm:w-10"
             onClick={handleNext}
-            aria-label="Next customers"
+            className="absolute -right-2 xl:-right-12 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-white dark:bg-zinc-800 shadow-md border border-zinc-100 dark:border-zinc-700 opacity-0 group-hover/customers:opacity-100 hover:bg-primary hover:text-white"
           >
-            <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+            <ChevronRight className="h-5 w-5" />
           </Button>
         </div>
-
       </div>
     </section>
   )

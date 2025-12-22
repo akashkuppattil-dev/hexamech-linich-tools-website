@@ -19,16 +19,16 @@ export interface Product {
 }
 
 export const categories = [
-  { id: "welding", name: "Welding Machines & Spot Welders", icon: "🔥", description: "Professional welding equipment" },
-  { id: "spray-guns", name: "Paint & Spray Systems", icon: "🎨", description: "Professional spray guns & booths" },
-  { id: "lifting", name: "Vehicle Lifts & Hoists", icon: "🏗️", description: "Two-post lifts, engine cranes" },
-  { id: "transmission", name: "Transmission Jacks & Engine Cranes", icon: "🚗", description: "Automotive service equipment" },
-  { id: "special-tools", name: "Collision & Special Tools", icon: "🔩", description: "Dent pullers, hydraulic presses" },
-  { id: "pneumatic", name: "Air Compressors & Pneumatic", icon: "💨", description: "Industrial air systems" },
-  { id: "painting", name: "Paint Curing & Infrared Systems", icon: "💡", description: "Infrared booths & curing lamps" },
-  { id: "measurement", name: "Precision Measurement", icon: "📏", description: "Professional testing & measurement" },
-  { id: "power-tools", name: "Professional Power Tools", icon: "⚡", description: "Bosch & DeWALT professional grade" },
-  { id: "finishing", name: "Finishing & Polishing", icon: "✨", description: "Professional sanding & polishing" },
+  { id: "welding", name: "Welding Machines & Spot Welders", icon: "Zap", description: "Professional welding equipment" },
+  { id: "spray-guns", name: "Paint & Spray Systems", icon: "Paintbrush", description: "Professional spray guns & booths" },
+  { id: "lifting", name: "Vehicle Lifts & Hoists", icon: "ArrowUpCircle", description: "Two-post lifts, engine cranes" },
+  { id: "transmission", name: "Transmission Jacks & Engine Cranes", icon: "Settings2", description: "Automotive service equipment" },
+  { id: "special-tools", name: "Collision & Special Tools", icon: "Wrench", description: "Dent pullers, hydraulic presses" },
+  { id: "pneumatic", name: "Air Compressors & Pneumatic", icon: "Wind", description: "Industrial air systems" },
+  { id: "painting", name: "Paint Curing & Infrared Systems", icon: "Sun", description: "Infrared booths & curing lamps" },
+  { id: "measurement", name: "Precision Measurement", icon: "Ruler", description: "Professional testing & measurement" },
+  { id: "power-tools", name: "Professional Power Tools", icon: "Hammer", description: "Bosch & DeWALT professional grade" },
+  { id: "finishing", name: "Finishing & Polishing", icon: "Sparkles", description: "Professional sanding & polishing" },
 ]
 
 export const brands = [
@@ -1024,7 +1024,7 @@ export const products: Product[] = [
     minOrderQty: 1,
     inStock: true,
   },
-    // ==================== COLLISION / FRAME EQUIPMENT ====================
+  // ==================== COLLISION / FRAME EQUIPMENT ====================
   {
     id: "46",
     name: "10-Ton Body Frame Straightener",

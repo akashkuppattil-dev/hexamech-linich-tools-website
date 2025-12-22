@@ -44,16 +44,16 @@ export function ProductVideosSection() {
   }
 
   return (
-    <section className="py-8 md:py-10 lg:py-12">
+    <section className="py-12 sm:py-16 bg-zinc-50 dark:bg-zinc-900/10 transition-colors">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-6 md:mb-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 md:mb-4">Product Videos</h2>
-          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
-            Watch our products in action and see how they can enhance your workshop
+        <div className="text-center mb-8">
+          <h2 className="text-3xl sm:text-4xl font-black text-zinc-900 dark:text-white mb-2 tracking-tighter">Tools in Action</h2>
+          <p className="text-sm md:text-base text-zinc-500 dark:text-zinc-400 font-medium max-w-xl mx-auto italic">
+            See how our equipment performs in real-world workshop environments.
           </p>
         </div>
 
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           {productVideos.map((video) => (
             <a
               key={video.id}
@@ -62,21 +62,21 @@ export function ProductVideosSection() {
               rel="noopener noreferrer"
               className="block group"
             >
-              <Card className="glass overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <div className="relative aspect-video bg-secondary/50">
+              <Card className="bg-white dark:bg-zinc-900 border-none overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-2xl">
+                <div className="relative aspect-video bg-zinc-100 dark:bg-zinc-800">
                   <img
                     src={video.thumbnail || "/placeholder.svg"}
                     alt={video.title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-colors">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-accent flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Play className="h-5 w-5 sm:h-6 sm:w-6 text-white fill-white ml-1" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                      <Play className="h-4 w-4 text-white fill-white ml-0.5" />
                     </div>
                   </div>
                 </div>
-                <CardContent className="p-3 sm:p-4">
-                  <h3 className="font-semibold text-sm sm:text-base text-foreground line-clamp-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-3">
+                  <h3 className="font-bold text-xs text-zinc-900 dark:text-zinc-100 line-clamp-2 group-hover:text-primary transition-colors">
                     {video.title}
                   </h3>
                 </CardContent>
@@ -85,66 +85,65 @@ export function ProductVideosSection() {
           ))}
         </div>
 
-        {/* Mobile carousel view - one video at a time */}
+        {/* Mobile carousel view */}
         <div className="md:hidden">
-          <div className="flex items-center gap-3">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={goToPrevVideo}
-              className="h-10 w-10 flex-shrink-0 bg-transparent"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </Button>
-
+          <div className="relative">
             <a
               href={`https://www.youtube.com/watch?v=${productVideos[currentVideoIndex].videoId}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="block group flex-1"
+              className="block group"
             >
-              <Card className="glass overflow-hidden hover:shadow-xl transition-all">
-                <div className="relative aspect-video bg-secondary/50">
+              <Card className="bg-white dark:bg-zinc-900 border-none overflow-hidden shadow-lg rounded-2xl">
+                <div className="relative aspect-video bg-zinc-100">
                   <img
                     src={productVideos[currentVideoIndex].thumbnail || "/placeholder.svg"}
                     alt={productVideos[currentVideoIndex].title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-colors">
-                    <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Play className="h-5 w-5 text-white fill-white ml-1" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                    <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-lg">
+                      <Play className="h-5 w-5 text-white fill-white ml-0.5" />
                     </div>
                   </div>
                 </div>
-                <CardContent className="p-3">
-                  <h3 className="font-semibold text-sm text-foreground line-clamp-2 group-hover:text-primary transition-colors">
+                <CardContent className="p-4">
+                  <h3 className="font-bold text-sm text-zinc-900 dark:text-zinc-100 line-clamp-2">
                     {productVideos[currentVideoIndex].title}
                   </h3>
                 </CardContent>
               </Card>
             </a>
 
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={goToNextVideo}
-              className="h-10 w-10 flex-shrink-0 bg-transparent"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </Button>
-          </div>
+            <div className="flex justify-center items-center gap-4 mt-6">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={goToPrevVideo}
+                className="h-10 w-10 rounded-full bg-white dark:bg-zinc-800 shadow-sm border border-zinc-100 dark:border-zinc-800"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </Button>
 
-          {/* Indicator dots */}
-          <div className="flex justify-center gap-2 mt-4">
-            {productVideos.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentVideoIndex(index)}
-                className={`h-2 rounded-full transition-all ${
-                  index === currentVideoIndex ? "w-8 bg-primary" : "w-2 bg-border"
-                }`}
-              />
-            ))}
+              <div className="flex gap-1.5">
+                {productVideos.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentVideoIndex(index)}
+                    className={`h-1.5 rounded-full transition-all ${index === currentVideoIndex ? "w-6 bg-primary" : "w-1.5 bg-zinc-300 dark:bg-zinc-800"}`}
+                  />
+                ))}
+              </div>
+
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={goToNextVideo}
+                className="h-10 w-10 rounded-full bg-white dark:bg-zinc-800 shadow-sm border border-zinc-100 dark:border-zinc-800"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </Button>
+            </div>
           </div>
         </div>
       </div>

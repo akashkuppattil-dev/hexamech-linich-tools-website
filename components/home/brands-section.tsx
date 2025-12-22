@@ -2,12 +2,11 @@
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import { ChevronLeft, ChevronRight, Star } from "lucide-react"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 
-
-// Dynamically import all images from the brands folder
 const brandImageFiles = [
   "black-decker.jpg",
   "blue-point-snapon.jpg",
@@ -22,7 +21,6 @@ const brandImageFiles = [
   "menzerna-logo.jpg",
   "mr-tools.jpg",
   "progrip.jpg",
-  // Add all WhatsApp images and any new images automatically
   "WhatsApp Image 2025-12-18 at 18.01.05_50cf4637.jpg",
   "WhatsApp Image 2025-12-18 at 18.01.06_24105a75.jpg",
   "WhatsApp Image 2025-12-18 at 18.01.06_27e1b7c5.jpg",
@@ -43,7 +41,7 @@ const brands = brandImageFiles.map((file) => ({
 export function BrandsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [brandsPerRow, setBrandsPerRow] = useState(6)
-  const totalRows = 2
+  const totalRows = 1
 
   useEffect(() => {
     const updateBrandsPerRow = () => {
@@ -57,99 +55,77 @@ export function BrandsSection() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + brandsPerRow) % brands.length)
-    }, 3000)
+    }, 4000)
     return () => clearInterval(timer)
   }, [brandsPerRow])
 
-  const nextRow = () => {
-    setCurrentIndex((prev) => (prev + brandsPerRow) % brands.length)
-  }
-
-  const prevRow = () => {
-    setCurrentIndex((prev) => (prev - brandsPerRow + brands.length) % brands.length)
-  }
+  const nextRow = () => setCurrentIndex((prev) => (prev + brandsPerRow) % brands.length)
+  const prevRow = () => setCurrentIndex((prev) => (prev - brandsPerRow + brands.length) % brands.length)
 
   const visibleBrands = Array.from({ length: brandsPerRow * totalRows }).map(
     (_, i) => brands[(currentIndex + i) % brands.length],
   )
 
   return (
-    <section className="py-8 md:py-10 lg:py-14 bg-gradient-to-b from-background to-secondary/10">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-6 md:mb-8">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 md:mb-4">
-            Brands We Deal With
-          </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            We partner with globally recognized brands to deliver genuine, high-performance automotive and workshop
-            solutions.
-          </p>
-        </div>
+    <section className="py-12 sm:py-16 bg-zinc-50 dark:bg-zinc-900/10 transition-colors">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-3xl sm:text-4xl font-black text-zinc-900 dark:text-white mb-8 tracking-tighter">
+          Our Brand Partners
+        </h2>
 
-        <div className="mb-12 md:mb-16">
-          <div className="flex justify-center gap-2 mb-5">
-            <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Main Brand Partner</span>
-            <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
-          </div>
-          <Card className="max-w-4xl mx-auto p-6 md:p-8 bg-gradient-to-br from-primary/5 via-white to-yellow-50 dark:from-primary/10 dark:via-secondary/30 dark:to-yellow-900/10 border-2 border-primary/30 shadow-xl hover:shadow-2xl transition-all duration-300">
-            <div className="text-center">
-              <div className="relative w-80 h-28 md:w-full md:h-32 mx-auto mb-4">
-                <Image
-                  src="/images/brands/linich-official.jpg"
-                  alt="LINICH - Main Brand Partner"
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 100vw, 800px"
-                  priority
-                />
+        {/* Highlight Main Partner */}
+        <div className="mb-12">
+          <Link href="/shop?brand=Linich">
+            <Card className="max-w-xl mx-auto p-4 sm:p-6 bg-white dark:bg-zinc-900 border border-primary/20 shadow-xl hover:shadow-2xl transition-all group overflow-hidden rounded-2xl">
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                <div className="relative w-32 h-20 flex-shrink-0">
+                  <Image
+                    src="/images/brands/linich-logo.jpg"
+                    alt="LINICH Partner"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div className="text-center sm:text-left flex-1 min-w-0">
+                  <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
+                    <h3 className="text-xl font-black text-zinc-900 dark:text-white tracking-tight">LINICH</h3>
+                    <Badge className="bg-primary/10 text-primary border-none text-[9px] font-black uppercase tracking-widest px-2 py-0.5">Primary</Badge>
+                  </div>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium italic mb-2">
+                    Official Strategic Partner. Premium tools for professional workshops.
+                  </p>
+                  <div className="text-primary font-black text-[9px] uppercase tracking-widest flex items-center justify-center sm:justify-start gap-1 group-hover:gap-2 transition-all">
+                    Explore Linich Range <ChevronRight className="h-3 w-3" />
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">LINICH</h3>
-              <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                Official Main Brand Partner of Hexamech. Premium automotive tools and equipment trusted by professionals
-                across Kerala.
-              </p>
-              <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
-                <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
-                  Exclusive Partner
-                </span>
-                <span className="px-3 py-1 bg-yellow-500/10 text-yellow-600 text-xs font-semibold rounded-full">
-                  Premium Quality
-                </span>
-              </div>
-            </div>
-          </Card>
+            </Card>
+          </Link>
         </div>
 
-        <div className="text-center mb-7">
-          <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Other Trusted Brands</p>
-        </div>
-
-        <div className="relative px-14 md:px-20">
+        {/* Slider for other brands */}
+        <div className="relative group/brands">
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
-            className="absolute left-1 top-1/2 -translate-y-1/2 bg-background shadow-lg z-10 hover:bg-primary hover:text-white transition-colors h-10 w-10"
             onClick={prevRow}
-            aria-label="Previous brands"
+            className="absolute -left-2 xl:-left-12 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-white dark:bg-zinc-800 shadow-md border border-zinc-100 dark:border-zinc-700 opacity-0 group-hover/brands:opacity-100 hover:bg-primary hover:text-white"
           >
             <ChevronLeft className="h-5 w-5" />
           </Button>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 md:gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-6">
             {visibleBrands.map((brand, index) => (
               <Card
                 key={index}
-                className="aspect-square flex items-center justify-center p-4 md:p-5 bg-white/60 dark:bg-secondary/40 border-primary/20 hover:border-primary/60 hover:bg-white/80 dark:hover:bg-secondary/60 transition-all duration-300 hover:shadow-xl"
+                className="aspect-[4/3] flex items-center justify-center p-4 bg-white dark:bg-zinc-900 border-none shadow hover:shadow-lg transition-all group/brand-card rounded-xl"
               >
-                <div className="w-full h-full relative flex items-center justify-center overflow-hidden">
+                <div className="w-full h-full relative">
                   <Image
                     src={brand.logo || "/placeholder.svg"}
                     alt={brand.name}
                     fill
-                    className="object-contain p-2.5 md:p-3 scale-160 hover:scale-175 transition-transform duration-300"
-                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16vw"
-                    loading="lazy"
+                    className="object-contain group-hover/brand-card:scale-110 transition-transform duration-500"
                   />
                 </div>
               </Card>
@@ -157,17 +133,14 @@ export function BrandsSection() {
           </div>
 
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
-            className="absolute right-1 top-1/2 -translate-y-1/2 bg-background shadow-lg z-10 hover:bg-primary hover:text-white transition-colors h-10 w-10"
             onClick={nextRow}
-            aria-label="Next brands"
+            className="absolute -right-2 xl:-right-12 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-white dark:bg-zinc-800 shadow-md border border-zinc-100 dark:border-zinc-700 opacity-0 group-hover/brands:opacity-100 hover:bg-primary hover:text-white"
           >
             <ChevronRight className="h-5 w-5" />
           </Button>
         </div>
-
-        <div className="flex justify-center gap-2 mt-10"></div>
       </div>
     </section>
   )

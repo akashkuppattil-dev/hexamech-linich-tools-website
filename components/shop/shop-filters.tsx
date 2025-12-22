@@ -1,10 +1,11 @@
 "use client"
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { X } from "lucide-react"
+import { Search } from "lucide-react"
+import { useState } from "react"
+import { Input } from "@/components/ui/input"
 
 interface Category {
   id: string
@@ -33,9 +34,9 @@ export function ShopFilters({
   setSelectedBrands,
   availability,
   setAvailability,
-  onClearFilters,
-  activeFiltersCount,
 }: ShopFiltersProps) {
+  const [brandSearch, setBrandSearch] = useState("")
+
   const toggleCategory = (categoryId: string) => {
     setSelectedCategories(
       selectedCategories.includes(categoryId)
@@ -56,35 +57,28 @@ export function ShopFilters({
     )
   }
 
-  return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-lg">Filters</h3>
-        {activeFiltersCount > 0 && (
-          <Button variant="ghost" size="sm" onClick={onClearFilters} className="text-muted-foreground">
-            <X className="h-4 w-4 mr-1" />
-            Clear all
-          </Button>
-        )}
-      </div>
+  const filteredBrands = brands.filter(b => b.toLowerCase().includes(brandSearch.toLowerCase()))
 
+  return (
+    <div className="space-y-4">
       <Accordion type="multiple" defaultValue={["categories", "brands", "availability"]} className="w-full">
-        {/* Categories */}
-        <AccordionItem value="categories">
-          <AccordionTrigger className="text-sm font-medium">Category</AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-2 pt-2">
+        {/* Categories Section */}
+        <AccordionItem value="categories" className="border-none">
+          <AccordionTrigger className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 hover:text-primary py-4 hover:no-underline select-none">
+            Categories
+          </AccordionTrigger>
+          <AccordionContent className="pb-4">
+            <div className="space-y-2.5 pt-1">
               {categories.map((category) => (
-                <div key={category.id} className="flex items-center space-x-2">
+                <div key={category.id} className="flex items-center space-x-3 group cursor-pointer" onClick={() => toggleCategory(category.id)}>
                   <Checkbox
                     id={`cat-${category.id}`}
                     checked={selectedCategories.includes(category.id)}
-                    onCheckedChange={() => toggleCategory(category.id)}
+                    className="h-4 w-4 rounded border-zinc-200 dark:border-zinc-800 data-[state=checked]:bg-primary data-[state=checked]:border-primary transition-all"
                   />
                   <Label
                     htmlFor={`cat-${category.id}`}
-                    className="text-sm cursor-pointer hover:text-primary transition-colors"
+                    className={`text-xs font-bold cursor-pointer transition-colors ${selectedCategories.includes(category.id) ? "text-primary" : "text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100"}`}
                   >
                     {category.name}
                   </Label>
@@ -94,78 +88,86 @@ export function ShopFilters({
           </AccordionContent>
         </AccordionItem>
 
-        {/* Brands */}
-        <AccordionItem value="brands">
-          <AccordionTrigger className="text-sm font-medium">Brand</AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-2 pt-2">
-              {brands.map((brand) => (
-                <div key={brand} className="flex items-center space-x-2">
+        {/* Brands Section */}
+        <AccordionItem value="brands" className="border-none">
+          <AccordionTrigger className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 hover:text-primary py-4 hover:no-underline select-none">
+            Brands
+          </AccordionTrigger>
+          <AccordionContent className="pb-4 overflow-hidden">
+            <div className="relative mb-4 group">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-300 dark:text-zinc-700 group-focus-within:text-primary transition-colors" />
+              <Input
+                placeholder="Search..."
+                className="h-9 pl-9 text-xs bg-zinc-50 dark:bg-zinc-900 border-zinc-100 dark:border-zinc-800 focus:bg-white dark:focus:bg-zinc-800 rounded-xl transition-all font-medium"
+                value={brandSearch}
+                onChange={(e) => setBrandSearch(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2.5 pt-1 max-h-[220px] overflow-y-auto pr-2 custom-scrollbar">
+              {filteredBrands.map((brand) => (
+                <div key={brand} className="flex items-center space-x-3 group cursor-pointer" onClick={() => toggleBrand(brand)}>
                   <Checkbox
                     id={`brand-${brand}`}
                     checked={selectedBrands.includes(brand)}
-                    onCheckedChange={() => toggleBrand(brand)}
+                    className="h-4 w-4 rounded border-zinc-200 dark:border-zinc-800 data-[state=checked]:bg-primary data-[state=checked]:border-primary transition-all"
                   />
                   <Label
                     htmlFor={`brand-${brand}`}
-                    className="text-sm cursor-pointer hover:text-primary transition-colors"
+                    className={`text-xs font-bold cursor-pointer transition-colors ${selectedBrands.includes(brand) ? "text-primary" : "text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100"}`}
                   >
                     {brand}
+                  </Label>
+                </div>
+              ))}
+              {filteredBrands.length === 0 && (
+                <p className="text-[10px] text-zinc-400 italic py-2">No brands found.</p>
+              )}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+
+        {/* Availability Section */}
+        <AccordionItem value="availability" className="border-none">
+          <AccordionTrigger className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 hover:text-primary py-4 hover:no-underline select-none">
+            Quick Filter
+          </AccordionTrigger>
+          <AccordionContent className="pb-4">
+            <div className="space-y-2.5 pt-1">
+              {[
+                { id: "in-stock", label: "Ready to Ship" },
+                { id: "on-offer", label: "Special Deals" },
+              ].map((option) => (
+                <div key={option.id} className="flex items-center space-x-3 group cursor-pointer" onClick={() => toggleAvailability(option.id)}>
+                  <Checkbox
+                    id={option.id}
+                    checked={availability.includes(option.id)}
+                    className="h-4 w-4 rounded border-zinc-200 dark:border-zinc-800 data-[state=checked]:bg-primary data-[state=checked]:border-primary transition-all"
+                  />
+                  <Label htmlFor={option.id} className={`text-xs font-bold cursor-pointer transition-colors ${availability.includes(option.id) ? "text-primary" : "text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100"}`}>
+                    {option.label}
                   </Label>
                 </div>
               ))}
             </div>
           </AccordionContent>
         </AccordionItem>
-
-        {/* Availability */}
-        <AccordionItem value="availability">
-          <AccordionTrigger className="text-sm font-medium">Availability</AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-2 pt-2">
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="in-stock"
-                  checked={availability.includes("in-stock")}
-                  onCheckedChange={() => toggleAvailability("in-stock")}
-                />
-                <Label htmlFor="in-stock" className="text-sm cursor-pointer hover:text-primary transition-colors">
-                  In Stock
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="out-of-stock"
-                  checked={availability.includes("out-of-stock")}
-                  onCheckedChange={() => toggleAvailability("out-of-stock")}
-                />
-                <Label htmlFor="out-of-stock" className="text-sm cursor-pointer hover:text-primary transition-colors">
-                  Out of Stock
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="on-offer"
-                  checked={availability.includes("on-offer")}
-                  onCheckedChange={() => toggleAvailability("on-offer")}
-                />
-                <Label htmlFor="on-offer" className="text-sm cursor-pointer hover:text-primary transition-colors">
-                  On Offer
-                </Label>
-              </div>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
       </Accordion>
 
-      {/* B2B Note */}
-      <div className="p-4 bg-primary/5 rounded-lg">
-        <p className="text-sm text-muted-foreground">
-          <strong className="text-foreground">B2B Wholesale</strong>
-          <br />
-          All prices are wholesale rates. GST extra as applicable. Contact us for bulk pricing.
-        </p>
-      </div>
+      <style jsx>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #e5e7eb;
+          border-radius: 10px;
+        }
+        :global(.dark) .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #27272a;
+        }
+      `}</style>
     </div>
   )
 }

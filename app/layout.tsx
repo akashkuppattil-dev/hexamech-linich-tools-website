@@ -113,7 +113,7 @@ export default function RootLayout({
             <div className="flex flex-col min-h-screen">
               <TopInfoBar />
               <Header />
-              <main className="flex-1 transition-all duration-300 bg-gray-50/30">{children}</main>
+              <main className="flex-1 transition-all duration-300 bg-gray-50/30 dark:bg-zinc-950">{children}</main>
               <Footer />
             </div>
             <WhatsAppButton />

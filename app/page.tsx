@@ -35,13 +35,7 @@ const BusinessDetails = dynamic(() => import("@/components/home/business-details
   loading: () => <div className="h-64 bg-secondary/20 animate-pulse rounded-lg" />,
 })
 
-const CtaBand = dynamic(() => import("@/components/home/cta-band").then(mod => ({ default: mod.CtaBand })), {
-  loading: () => <div className="h-32 bg-secondary/20 animate-pulse rounded-lg" />,
-})
 
-const InstagramStrip = dynamic(() => import("@/components/home/instagram-strip").then(mod => ({ default: mod.InstagramStrip })), {
-  loading: () => <div className="h-32 bg-secondary/20 animate-pulse rounded-lg" />,
-})
 
 export default function HomePage() {
   return (
@@ -56,8 +50,6 @@ export default function HomePage() {
       <TestimonialsSlider />
       <WhyHexamech />
       <BusinessDetails />
-      <CtaBand />
-      <InstagramStrip />
     </div>
   )
 }

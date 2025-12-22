@@ -1,49 +1,45 @@
 import Link from "next/link"
-import { MessageCircle, FileText } from "lucide-react"
+import { MessageCircle, FileText, Instagram } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function CtaBand() {
   return (
-    <section className="py-8 sm:py-10 md:py-12 bg-primary relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23ffffff' fillOpacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
+    <section className="py-8 bg-primary relative overflow-hidden text-white transition-colors">
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-foreground mb-3 sm:mb-4">
-            Need Bulk Pricing or Workshop Setup?
-          </h2>
-          <p className="text-primary-foreground/80 text-sm sm:text-base md:text-lg mb-6 sm:mb-8">
-            Setting up a new workshop or need bulk quantities? Get customized quotes and expert guidance from our team.
-          </p>
-          <div className="flex flex-col xs:flex-row flex-wrap justify-center gap-3 sm:gap-4">
-            <Link href="/contact" className="w-full xs:w-auto">
-              <Button
-                size="lg"
-                variant="secondary"
-                className="bg-white text-primary hover:bg-white/90 w-full xs:w-auto"
-              >
-                <FileText className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                Send RFQ
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="text-center lg:text-left">
+            <h2 className="text-2xl sm:text-3xl font-black mb-2 tracking-tighter">
+              B2B Workshop Solutions
+            </h2>
+            <p className="text-sm text-primary-foreground/80 font-medium">
+              bulk pricing, GST invoicing, and PAN India delivery support.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link href="/contact">
+              <Button variant="secondary" size="sm" className="bg-white text-primary hover:bg-zinc-100 font-black uppercase tracking-widest text-[10px] h-10 px-6 rounded-lg">
+                <FileText className="mr-2 h-3.5 w-3.5" />
+                Get Quote
               </Button>
             </Link>
-            <a
-              href="https://wa.me/919876543210?text=Hi%20Hexamech%2C%20I%20need%20bulk%20pricing%20for%20workshop%20setup"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full xs:w-auto"
-            >
-              <Button size="lg" className="bg-[#25D366] hover:bg-[#128C7E] text-white border-0 w-full xs:w-auto">
-                <MessageCircle className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                Chat on WhatsApp
+            <a href="https://wa.me/917510638693" target="_blank" rel="noopener noreferrer">
+              <Button size="sm" className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white border-0 font-black uppercase tracking-widest text-[10px] h-10 px-6 rounded-lg shadow-lg">
+                <MessageCircle className="mr-2 h-3.5 w-3.5" />
+                WhatsApp
               </Button>
+            </a>
+            <div className="h-10 w-px bg-white/20 hidden sm:block mx-2" />
+            <a href="https://instagram.com/hexamech_linich_tools" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
+              <div className="p-2 rounded-xl bg-white/10 group-hover:bg-white/20 transition-all">
+                <Instagram className="h-4 w-4 text-white" />
+              </div>
+              <div className="text-left hidden sm:block">
+                <p className="text-[10px] font-black uppercase tracking-widest leading-none mb-1">Follow Us</p>
+                <p className="text-[9px] text-primary-foreground/60 font-medium">@hexamech_tools</p>
+              </div>
             </a>
           </div>
         </div>

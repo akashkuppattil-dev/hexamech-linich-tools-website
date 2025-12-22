@@ -23,7 +23,7 @@ const categoryImages: Record<string, string> = {
 
 export function CategoriesGrid() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const itemsToShow = 4 // reduced from 6 to 4 items displayed
+  const itemsToShow = 4
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % categories.length)
@@ -46,76 +46,78 @@ export function CategoriesGrid() {
   }
 
   return (
-    <section className="py-8 md:py-10 bg-secondary/30">
+    <section className="py-12 sm:py-16 bg-zinc-50 dark:bg-zinc-900/10 transition-colors duration-500">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 md:mb-12">
-          <div className="text-center sm:text-left">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 md:mb-4">
+        <div className="flex flex-col md:flex-row items-end justify-between mb-8 gap-4">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl sm:text-4xl font-black text-zinc-900 dark:text-white mb-2 tracking-tighter">
               Shop by Category
             </h2>
-            <p className="text-sm md:text-base text-muted-foreground max-w-2xl">
-              Browse our comprehensive range of automotive and workshop tools. From spray guns to engine cranes, we have
-              everything your workshop needs.
+            <p className="text-sm md:text-base text-zinc-500 dark:text-zinc-400 font-medium italic">
+              Explore our range of high-performance tools.
             </p>
           </div>
-          <Link href="/shop" onClick={handleClick}>
-            <Button variant="outline" className="group w-full sm:w-auto bg-transparent">
-              View All Categories
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          <Link href="/shop" onClick={handleClick} className="hidden sm:block">
+            <Button size="sm" variant="link" className="text-primary font-black uppercase tracking-widest text-[10px] p-0 h-auto">
+              View All Categories <ArrowRight className="ml-2 h-3 w-3" />
             </Button>
           </Link>
         </div>
 
-        <div className="relative">
-          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={goToPrev}
-              className="h-10 w-10 md:h-12 md:w-12 flex-shrink-0 bg-transparent"
-              aria-label="Previous categories"
-            >
-              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
-            </Button>
+        <div className="relative group/categories">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={goToPrev}
+            className="absolute -left-2 xl:-left-12 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-white dark:bg-zinc-800 shadow-md border border-zinc-100 dark:border-zinc-700 transition-all opacity-0 group-hover/categories:opacity-100 hover:bg-primary hover:text-white"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </Button>
 
-            <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 py-6">
-              {" "}
-              {/* changed lg:grid-cols-6 to lg:grid-cols-4 */}
-              {getVisibleCategories().map((category) => (
-                <Link key={category.id} href="/shop" onClick={handleClick}>
-                  <Card className="group glass overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full cursor-pointer">
-                    <div className="aspect-[4/3] relative overflow-hidden">
-                      <Image
-                        src={categoryImages[category.id] || "/placeholder.svg?height=200&width=300&query=tools"}
-                        alt={category.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+            {getVisibleCategories().map((category) => (
+              <Link key={category.id} href="/shop" onClick={handleClick}>
+                <Card className="group relative h-[300px] sm:h-[350px] overflow-hidden rounded-xl border-none shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                  <Image
+                    src={categoryImages[category.id] || "/placeholder.svg"}
+                    alt={category.name}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80" />
+
+                  <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end">
+                    <h3 className="font-black text-xl text-white mb-1 leading-tight group-hover:text-primary transition-colors">
+                      {category.name}
+                    </h3>
+                    <p className="text-[10px] text-zinc-300 line-clamp-2 italic mb-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                      {category.description}
+                    </p>
+                    <div className="flex items-center gap-2 text-primary font-black text-[9px] uppercase tracking-widest">
+                      Explore <ArrowRight className="h-3 w-3 translate-x-0 group-hover:translate-x-1 transition-transform" />
                     </div>
-
-                    <CardContent className="p-2 sm:p-3 relative">
-                      <h3 className="font-semibold text-xs sm:text-sm text-foreground group-hover:text-primary transition-colors line-clamp-1">
-                        {category.name}
-                      </h3>
-                      <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5">{category.description}</p>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={goToNext}
-              className="h-10 w-10 md:h-12 md:w-12 flex-shrink-0 bg-transparent"
-              aria-label="Next categories"
-            >
-              <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
-            </Button>
+                  </div>
+                </Card>
+              </Link>
+            ))}
           </div>
 
-          
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={goToNext}
+            className="absolute -right-2 xl:-right-12 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-white dark:bg-zinc-800 shadow-md border border-zinc-100 dark:border-zinc-700 transition-all opacity-0 group-hover/categories:opacity-100 hover:bg-primary hover:text-white"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </Button>
+        </div>
+
+        <div className="mt-8 sm:hidden text-center">
+          <Link href="/shop" onClick={handleClick}>
+            <Button variant="outline" className="w-full text-primary border-primary rounded-xl font-bold h-11 text-xs uppercase tracking-widest">
+              All Categories
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

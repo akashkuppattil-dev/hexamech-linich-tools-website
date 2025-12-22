@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { ArrowRight, MessageCircle, Shield, BadgeCheck, Truck, Award, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
@@ -14,132 +13,82 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-[70vh] sm:min-h-[75vh] flex items-center overflow-hidden">
-      {/* Background Image with Overlay */}
+    <section className="relative min-h-[60vh] lg:min-h-[75vh] flex items-center overflow-hidden bg-white dark:bg-zinc-950">
+      {/* Background with MINIMAL overlay for maximum clarity */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 scale-100"
         style={{
           backgroundImage: `url('/automotive-workshop-mechanic-tools-spray-gun-weldi.jpg')`,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-background/98 via-background/90 to-background/60 sm:from-background/95 sm:via-background/80 sm:to-background/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-white/5 dark:bg-black/10 transition-colors duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/30 to-transparent dark:from-zinc-950 dark:via-zinc-950/50 dark:to-transparent" />
       </div>
 
-      {/* Animated Background Elements */}
-      {mounted && (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 left-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-accent/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        </div>
-      )}
-
-      {/* Content - Improved mobile layout and text sizing */}
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl">
-          <div className="flex flex-col xs:flex-row flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
-            {/* Show badges on mobile */}
-            <Badge variant="secondary" className="glass px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm w-fit flex">
-              <Shield className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary" />
-              GST Verified – 32CWVPM3137R1ZP
-            </Badge>
-            <Badge variant="secondary" className="glass px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm w-fit flex">
-              <BadgeCheck className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-accent" />
-              B2B Wholesale Supplier
-            </Badge>
-            <Badge variant="secondary" className="glass px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm w-fit flex">
-              <Award className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary" />
-              Trusted by 4,000+ Workshops
-            </Badge>
+      <div className="container mx-auto px-4 relative z-10 py-10 lg:py-16">
+        <div className="max-w-4xl">
+          {/* Tagline / Badges Row - Smaller */}
+          <div className="flex flex-wrap items-center gap-2 mb-6">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-green-500/10 dark:bg-green-500/20 border border-green-500/20 rounded-full backdrop-blur-md">
+              <div className="w-1 h-1 rounded-full bg-green-500 animate-pulse" />
+              <span className="text-[9px] sm:text-[10px] font-black text-green-700 dark:text-green-400 uppercase tracking-widest">GST Verified</span>
+            </div>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-red-500/10 dark:bg-red-500/20 border border-red-500/20 rounded-full backdrop-blur-md">
+              <span className="text-[9px] sm:text-[10px] font-black text-red-700 dark:text-red-400 uppercase tracking-widest">B2B Wholesale</span>
+            </div>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-3 sm:mb-4">
-            Professional Automotive &<span className="text-primary block">Industrial Tools Supplier</span>
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-zinc-900 dark:text-white leading-[0.95] mb-4 tracking-tighter drop-shadow-lg">
+            Industrial Grade <br />
+            <span className="text-[#4CAF50] inline-flex items-center gap-3">
+              Tools & Gear
+              <div className="hidden lg:block w-24 h-1.5 bg-[#4CAF50]/20 rounded-full overflow-hidden">
+                <div className="w-full h-full bg-[#4CAF50] origin-left animate-slide-right" />
+              </div>
+            </span>
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-2xl leading-relaxed">
-            Your trusted B2B partner for premium automotive tools and equipment. Serving workshops, dealerships, and
-            industrial buyers across India with genuine products, wholesale pricing, and expert support.
+          <p className="text-sm sm:text-base md:text-lg text-zinc-900 dark:text-zinc-100 mb-8 max-w-xl leading-relaxed font-bold drop-shadow-md">
+            Your trusted B2B partner for premium automotive equipment. Serving workshops, dealerships, and industrial buyers across India.
           </p>
 
-          {/* CTAs - Stack on mobile */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <Link href="/shop" className="w-full sm:w-auto">
+          <div className="flex flex-wrap items-center gap-3 mb-12">
+            <Link href="/shop">
               <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground group w-full sm:w-auto"
+                size="sm"
+                className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white px-6 h-11 text-xs font-bold flex items-center gap-2 rounded-lg transition-all shadow-lg shadow-green-900/30"
               >
-                View Product Catalog
-                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
+                Explore Catalog
+                <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <a
-              href="https://wa.me/917510638693?text=I%20need%20to%20request%20a%20quote%20for%20bulk%20orders"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto"
-            >
+            <a href="https://wa.me/917510638693" target="_blank" rel="noopener noreferrer">
               <Button
-                size="lg"
                 variant="outline"
-                className="border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white bg-transparent w-full sm:w-auto"
+                size="sm"
+                className="border-zinc-300 dark:border-zinc-700 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md text-zinc-900 dark:text-white px-6 h-11 text-xs font-bold flex items-center gap-2 rounded-lg transition-all"
               >
-                <MessageCircle className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                <MessageCircle className="h-4 w-4 text-[#25D366]" />
                 Request Quote
               </Button>
             </a>
           </div>
 
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 sm:gap-8 mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-border/50">
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-primary">4,000+</p>
-              <p className="text-xs sm:text-sm text-muted-foreground">Satisfied Customers</p>
-            </div>
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-primary">1,000+</p>
-              <p className="text-xs sm:text-sm text-muted-foreground">Premium Products</p>
-            </div>
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-primary">24 Hours</p>
-              <p className="text-xs sm:text-sm text-muted-foreground">Quote Response Time</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <Truck className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
-              <div>
-                <p className="text-base sm:text-lg font-bold text-accent">PAN India</p>
-                <p className="text-xs sm:text-sm text-muted-foreground">Fast Delivery</p>
+          {/* Stats Grid - Smaller */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 w-full max-w-3xl">
+            {[
+              { label: "Satisfied Customers", value: "4,000+", icon: Award, color: "text-green-500" },
+              { label: "Products", value: "1,000+", icon: BadgeCheck, color: "text-blue-500" },
+              { label: "Response", value: "24 Hours", icon: Zap, color: "text-amber-500" },
+              { label: "Registered", value: "Verified", icon: Shield, color: "text-purple-500" },
+            ].map((stat, i) => (
+              <div key={i} className="p-3 rounded-2xl bg-white/95 dark:bg-zinc-900/95 border border-white dark:border-zinc-800 shadow-xl transition-transform hover:-translate-y-1">
+                <stat.icon className={`h-4 w-4 ${stat.color} mb-2`} />
+                <div className="text-lg sm:text-xl font-black text-zinc-900 dark:text-white mb-0.5">{stat.value}</div>
+                <div className="text-[8px] sm:text-[9px] font-black text-zinc-500 dark:text-zinc-500 uppercase tracking-widest">{stat.label}</div>
               </div>
-            </div>
+            ))}
           </div>
-
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-6 mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-border/50 text-xs sm:text-sm text-muted-foreground">
-            <span className="flex items-center gap-1.5">
-              <Zap className="h-3 w-3 text-primary" />
-              GST Verified
-            </span>
-            <span className="hidden sm:inline text-primary/30">|</span>
-            <span className="flex items-center gap-1.5">
-              <Zap className="h-3 w-3 text-primary" />
-              Genuine Products
-            </span>
-            <span className="hidden sm:inline text-primary/30">|</span>
-            <span className="flex items-center gap-1.5">
-              <Zap className="h-3 w-3 text-primary" />
-              Bulk Discounts
-            </span>
-            <span className="hidden sm:inline text-primary/30">|</span>
-            <span className="flex items-center gap-1.5">
-              <Zap className="h-3 w-3 text-primary" />
-              Expert Support
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator - Hidden on mobile */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden sm:block">
-        <div className="w-6 h-10 border-2 border-muted-foreground/50 rounded-full flex items-start justify-center p-2">
-          <div className="w-1.5 h-3 bg-primary rounded-full animate-pulse" />
         </div>
       </div>
     </section>

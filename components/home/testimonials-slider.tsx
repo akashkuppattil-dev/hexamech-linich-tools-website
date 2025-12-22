@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
+import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react"
 import Image from "next/image"
 import { useCallback, useEffect, useState } from "react"
 
@@ -10,277 +10,125 @@ const testimonials = [
   {
     id: 1,
     name: "Rajesh Kumar",
-    role: "Owner, Rajesh Auto Workshop",
+    role: "Owner, Auto Workshop",
     location: "Calicut",
     image: "/testimonial-1-indian-mechanic-workshop-owner.jpg",
-    content:
-      "Quality tools, fast delivery! Hexamech has been our go-to supplier for all automotive tools. Their spray guns are top-notch and the prices are competitive for wholesale.",
+    content: "Quality tools, fast delivery! Hexamech has been our go-to supplier for all automotive tools. Competitive wholesale prices.",
     rating: 5,
   },
   {
     id: 2,
     name: "Mohammed Ashraf",
-    role: "Manager, Elite Paint Booth",
+    role: "Manager, Body Shop",
     location: "Kochi",
     image: "/testimonial-2-indian-paint-booth-manager.jpg",
-    content:
-      "Our body shop spray guns are fully from Hexamech now. The Devilbiss guns they supply are genuine and their after-sales support is excellent.",
+    content: "Our body shop spray guns are fully from Hexamech. Genuine products and excellent after-sales support.",
     rating: 5,
   },
   {
     id: 3,
     name: "Suresh Nair",
-    role: "Service Manager, Multi-Brand Center",
+    role: "Service Manager",
     location: "Trivandrum",
     image: "/testimonial-3-indian-service-manager.jpg",
-    content:
-      "Reliable wholesale partner for our multi-brand service center. They always have stock and delivery to Trivandrum is quick. Highly recommended!",
+    content: "Reliable wholesale partner. They always have stock and delivery to Trivandrum is quick. Highly recommended!",
     rating: 5,
   },
   {
     id: 4,
     name: "Pradeep Menon",
-    role: "Owner, Menon Motors",
+    role: "Proprietor",
     location: "Thrissur",
     image: "/testimonial-4-indian-motors-owner.jpg",
-    content:
-      "The welding machines we bought from Hexamech have been running perfectly for over a year. Great quality and they helped us choose the right equipment.",
-    rating: 5,
-  },
-  {
-    id: 5,
-    name: "Anwar Ali",
-    role: "Proprietor, Ali Garage",
-    location: "Malappuram",
-    image: "/testimonial-5-indian-garage-proprietor.jpg",
-    content:
-      "Being from Malappuram, we get same-day delivery from Hexamech. Their tool selection is impressive and Jithin sir personally ensures quality service.",
-    rating: 5,
-  },
-  {
-    id: 6,
-    name: "Vineeth Krishnan",
-    role: "Owner, VK Auto Care",
-    location: "Kannur",
-    image: "/testimonial-6-indian-auto-care-owner.jpg",
-    content:
-      "We've been buying power tools from Hexamech for 6 months now. The Bosch grinders and drills are genuine, and the pricing is much better than retail.",
-    rating: 5,
-  },
-  {
-    id: 7,
-    name: "Shibu Thomas",
-    role: "Head Mechanic, Thomas Motors",
-    location: "Kottayam",
-    image: "/testimonial-7-indian-head-mechanic.jpg",
-    content:
-      "The pneumatic tools from Hexamech have transformed our workshop efficiency. Fast response on WhatsApp and delivery tracking is always provided.",
-    rating: 5,
-  },
-  {
-    id: 8,
-    name: "Abdul Rahman",
-    role: "Owner, Rahman Paint Works",
-    location: "Palakkad",
-    image: "/testimonial-8-indian-paint-works-owner.jpg",
-    content:
-      "Their SATA spray guns are the best in the market. Hexamech understands the needs of professional painters. Will continue to order from them.",
-    rating: 5,
-  },
-  {
-    id: 9,
-    name: "Gopinath M",
-    role: "Service Advisor, Premium Cars",
-    location: "Ernakulam",
-    image: "/testimonial-9-indian-service-advisor.jpg",
-    content:
-      "Outstanding bulk pricing for our dealership. The engine cranes and transmission jacks are heavy-duty quality. Very satisfied with Hexamech service.",
-    rating: 5,
-  },
-  {
-    id: 10,
-    name: "Sajith Kumar",
-    role: "Owner, SK Automobile Works",
-    location: "Kollam",
-    image: "/testimonial-10-indian-automobile-owner.jpg",
-    content:
-      "From hand tools to welding equipment, Hexamech has everything. Their team is knowledgeable and always suggests the right tool for the job. 5-star service!",
+    content: "Welding machines have been running perfectly for a year. They helped us choose the right equipment.",
     rating: 5,
   },
 ]
 
 export function TestimonialsSlider() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
-
-  const itemsPerPageDesktop = 4
-  const itemsPerPageMobile = 1
   const totalItems = testimonials.length
 
-  const goToSlide = useCallback(
-    (index: number) => {
-      if (isAnimating) return
-      setIsAnimating(true)
-      setCurrentIndex(index % totalItems)
-      setTimeout(() => setIsAnimating(false), 500)
-    },
-    [isAnimating, totalItems],
-  )
-
-  const nextSlide = useCallback(() => {
-    goToSlide((currentIndex + 1) % totalItems)
-  }, [currentIndex, totalItems, goToSlide])
-
-  const prevSlide = useCallback(() => {
-    goToSlide((currentIndex - 1 + totalItems) % totalItems)
-  }, [currentIndex, totalItems, goToSlide])
+  const nextSlide = useCallback(() => setCurrentIndex((prev) => (prev + 1) % totalItems), [totalItems])
+  const prevSlide = useCallback(() => setCurrentIndex((prev) => (prev - 1 + totalItems) % totalItems), [totalItems])
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 4000)
+    const timer = setInterval(nextSlide, 5000)
     return () => clearInterval(timer)
   }, [nextSlide])
 
-  const visibleTestimonials = Array.from({ length: itemsPerPageDesktop }).map(
-    (_, i) => testimonials[(currentIndex + i) % totalItems],
-  )
-
-  const mobileTestimonial = testimonials[currentIndex]
-
   return (
-    <section className="py-6 md:py-8 lg:py-10 bg-secondary/30">
+    <section className="py-12 sm:py-16 bg-zinc-50 dark:bg-zinc-900/10 transition-colors">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-4 md:mb-6">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 md:mb-4">
-            What Our Customers Say
-          </h2>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl sm:text-4xl font-black text-zinc-900 dark:text-white mb-2 tracking-tighter">Voices of Trust</h2>
+          <p className="text-sm md:text-base text-zinc-500 dark:text-zinc-400 font-medium max-w-xl mx-auto italic">
+            Feedback from professional workshops and industrial partners.
+          </p>
         </div>
 
-        <div
-          className={`hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 transition-opacity duration-500 ${
-            isAnimating ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          {visibleTestimonials.map((testimonial) => (
-            <Card key={testimonial.id} className="glass h-full flex flex-col">
-              <CardContent className="p-4 sm:p-5 md:p-6 flex flex-col h-full">
-                <Quote className="h-6 w-6 sm:h-8 sm:w-8 text-primary/30 mb-3 sm:mb-4 shrink-0" />
-
-                <p className="text-foreground leading-relaxed mb-4 sm:mb-6 flex-grow text-xs sm:text-sm">
-                  "{testimonial.content}"
-                </p>
-
-                <div className="flex items-center gap-3 mt-auto">
-                  <Image
-                    src={testimonial.image || "/placeholder.svg"}
-                    alt={testimonial.name}
-                    width={40}
-                    height={40}
-                    className="rounded-full object-cover sm:w-12 sm:h-12"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-foreground text-xs sm:text-sm truncate">{testimonial.name}</h4>
-                    <p className="text-[10px] sm:text-xs text-muted-foreground truncate">{testimonial.role}</p>
-                    <p className="text-[10px] sm:text-xs text-primary">{testimonial.location}</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-0.5 mt-2 sm:mt-3">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <svg key={i} className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-500 fill-current" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        <div className="md:hidden">
-          <div className="flex items-center gap-3">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={prevSlide}
-              className="h-10 w-10 flex-shrink-0 bg-transparent"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </Button>
-
-            <Card className="glass h-full flex flex-col flex-1">
-              <CardContent className="p-4 flex flex-col h-full">
-                <Quote className="h-6 w-6 text-primary/30 mb-3 shrink-0" />
-
-                <p className="text-foreground leading-relaxed mb-4 flex-grow text-xs">"{mobileTestimonial.content}"</p>
-
-                <div className="flex items-center gap-3 mt-auto">
-                  <Image
-                    src={mobileTestimonial.image || "/placeholder.svg"}
-                    alt={mobileTestimonial.name}
-                    width={40}
-                    height={40}
-                    className="rounded-full object-cover w-10 h-10"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-foreground text-xs truncate">{mobileTestimonial.name}</h4>
-                    <p className="text-[10px] text-muted-foreground truncate">{mobileTestimonial.role}</p>
-                    <p className="text-[10px] text-primary">{mobileTestimonial.location}</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-0.5 mt-2">
-                  {[...Array(mobileTestimonial.rating)].map((_, i) => (
-                    <svg key={i} className="h-3 w-3 text-yellow-500 fill-current" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={nextSlide}
-              className="h-10 w-10 flex-shrink-0 bg-transparent"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </Button>
-          </div>
-
-          <div className="flex justify-center gap-1.5 mt-4 flex-wrap">
-            {[...Array(totalItems)].map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`h-2 rounded-full transition-all ${
-                  index === currentIndex ? "bg-primary w-5" : "bg-muted-foreground/30 hover:bg-muted-foreground/50 w-2"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Desktop navigation buttons and dots */}
-        <div className="hidden lg:flex">
+        <div className="relative group/testimonials max-w-5xl mx-auto">
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 bg-background shadow-lg h-10 w-10"
             onClick={prevSlide}
+            className="absolute -left-2 sm:-left-12 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-white dark:bg-zinc-800 shadow-md border border-zinc-100 dark:border-zinc-800 opacity-0 group-hover/testimonials:opacity-100 transition-all hover:bg-primary hover:text-white"
           >
             <ChevronLeft className="h-5 w-5" />
           </Button>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-6">
+            {[0, 1].map((offset) => {
+              const testimonial = testimonials[(currentIndex + offset) % totalItems]
+              return (
+                <Card key={testimonial.id} className="bg-white dark:bg-zinc-900 border-none shadow-lg rounded-2xl p-6 flex flex-col h-full animate-in fade-in duration-500">
+                  <div className="flex gap-0.5 mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-3 w-3 text-yellow-500 fill-current" />
+                    ))}
+                  </div>
+                  <Quote className="h-8 w-8 text-primary/10 mb-4" />
+                  <p className="text-sm text-zinc-700 dark:text-zinc-300 font-medium leading-relaxed italic mb-6 flex-1">
+                    "{testimonial.content}"
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="relative w-10 h-10 rounded-full overflow-hidden border border-zinc-100 dark:border-zinc-800">
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <h4 className="font-bold text-xs text-zinc-900 dark:text-zinc-100 truncate">{testimonial.name}</h4>
+                      <p className="text-[10px] text-zinc-500 dark:text-zinc-500 font-medium truncate">{testimonial.role} • {testimonial.location}</p>
+                    </div>
+                  </div>
+                </Card>
+              )
+            })}
+          </div>
+
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 bg-background shadow-lg h-10 w-10"
             onClick={nextSlide}
+            className="absolute -right-2 sm:-right-12 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-white dark:bg-zinc-800 shadow-md border border-zinc-100 dark:border-zinc-800 opacity-0 group-hover/testimonials:opacity-100 transition-all hover:bg-primary hover:text-white"
           >
             <ChevronRight className="h-5 w-5" />
           </Button>
         </div>
 
+        <div className="flex justify-center gap-1.5 mt-8">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`h-1.5 rounded-full transition-all ${index === currentIndex ? "w-6 bg-primary" : "w-1.5 bg-zinc-300 dark:bg-zinc-800"}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )

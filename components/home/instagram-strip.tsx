@@ -3,41 +3,37 @@ import { Button } from "@/components/ui/button"
 
 export function InstagramStrip() {
   return (
-    <section className="py-6 sm:py-8 md:py-10 bg-gradient-to-r from-pink-500/5 via-purple-500/10 to-pink-500/5 border-t border-border/50">
+    <section className="py-8 bg-zinc-50 dark:bg-zinc-900/10 border-t border-zinc-100 dark:border-zinc-900 transition-colors">
       <div className="container mx-auto px-4">
-        <div className="max-w-2xl mx-auto text-center">
-          {/* Instagram Icon with gradient */}
-          <div className="inline-flex p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 mb-4 sm:mb-6 shadow-lg">
-            <Instagram className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
+        <div className="max-w-xl mx-auto text-center">
+          <div className="inline-flex p-3 rounded-2xl bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 mb-4 shadow-xl">
+            <Instagram className="h-6 w-6 text-white" />
           </div>
 
-          {/* Handle and CTA */}
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-2 sm:mb-3">
+          <h3 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white mb-2 tracking-tighter">
             @hexamech_linich_tools
           </h3>
-          <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 px-4">
-            Follow for latest offers, new arrivals & live delivery updates
+          <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mb-6 font-medium italic">
+            Join 4,000+ workshop partners for live delivery stories and new gear drops.
           </p>
 
-          {/* Follow Button */}
           <a href="https://instagram.com/hexamech_linich_tools" target="_blank" rel="noopener noreferrer">
             <Button
-              size="lg"
-              className="bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 hover:from-pink-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-lg text-sm sm:text-base px-4 sm:px-6"
+              size="sm"
+              className="bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:opacity-90 shadow-lg text-[10px] font-black uppercase tracking-widest px-8 h-10 rounded-xl"
             >
-              <Instagram className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-              Follow on Instagram
-              <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 ml-2" />
+              <Instagram className="h-3.5 w-3.5 mr-2" />
+              Follow Instagram
+              <ExternalLink className="h-3 w-3 ml-2 opacity-50" />
             </Button>
           </a>
 
-          {/* Trust indicators */}
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mt-4 sm:mt-6 text-xs sm:text-sm text-muted-foreground">
-            <span>Daily Product Updates</span>
-            <span className="text-pink-500">•</span>
-            <span>Live Delivery Stories</span>
-            <span className="text-pink-500 hidden sm:inline">•</span>
-            <span className="hidden sm:inline">Exclusive Offers</span>
+          <div className="flex flex-wrap justify-center gap-4 mt-8 text-[9px] font-black uppercase tracking-widest text-zinc-400">
+            <span>Daily Updates</span>
+            <span className="text-zinc-200 dark:text-zinc-800">•</span>
+            <span>Live Stories</span>
+            <span className="text-zinc-200 dark:text-zinc-800">•</span>
+            <span>Bulk Offers</span>
           </div>
         </div>
       </div>

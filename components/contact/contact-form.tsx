@@ -2,14 +2,14 @@
 
 import type React from "react"
 
-import { useState } from "react"
-import { Send, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Card, CardContent } from "@/components/ui/card"
+import { Textarea } from "@/components/ui/textarea"
+import { CheckCircle, Send } from "lucide-react"
+import { useState } from "react"
 
 const productInterests = [
   { value: "general", label: "General Enquiry" },
@@ -41,8 +41,8 @@ export function ContactForm() {
   if (isSubmitted) {
     return (
       <Card className="glass">
-        <CardContent className="p-8 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+        <CardContent className="p-6 text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-3">
             <CheckCircle className="h-8 w-8 text-primary" />
           </div>
           <h3 className="text-xl font-bold text-foreground mb-2">Thank You!</h3>
@@ -57,9 +57,9 @@ export function ContactForm() {
 
   return (
     <Card className="glass">
-      <CardContent className="p-6">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid sm:grid-cols-2 gap-4">
+      <CardContent className="p-5">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid sm:grid-cols-2 gap-3">
             <div className="space-y-2">
               <Label htmlFor="name">Name *</Label>
               <Input id="name" name="name" placeholder="Your name" required />
@@ -75,7 +75,7 @@ export function ContactForm() {
             <Input id="email" name="email" type="email" placeholder="your@email.com" required />
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-3">
             <div className="space-y-2">
               <Label htmlFor="company">Company / Workshop Name</Label>
               <Input id="company" name="company" placeholder="Your workshop name" />
@@ -108,7 +108,7 @@ export function ContactForm() {
               id="message"
               name="message"
               placeholder="Describe your requirements, quantities needed, or any questions..."
-              rows={5}
+              rows={4}
               required
             />
           </div>

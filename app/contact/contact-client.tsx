@@ -81,12 +81,12 @@ export function ContactClientPage() {
   const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT.BUSINESS_ADDRESS)}`
 
   return (
-    <div className="pt-16 sm:pt-18 md:pt-20">
+    <div className="pt-12 sm:pt-14 md:pt-16">
       {/* Hero Section */}
-      <section className="py-8 sm:py-10 md:py-12 bg-gradient-to-b from-background to-secondary/10">
+      <section className="py-6 sm:py-7 md:py-8 bg-gradient-to-b from-background to-secondary/10">
         <div className="container mx-auto px-4 text-center">
-          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Contact Us</Badge>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <Badge className="mb-3 bg-primary/10 text-primary border-primary/20">Contact Us</Badge>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3">
             Get in Touch with Hexamech
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -96,7 +96,7 @@ export function ContactClientPage() {
       </section>
 
       {/* Why Contact Us */}
-      <section className="py-8 sm:py-10 bg-background">
+      <section className="py-6 sm:py-7 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {whyContactUs.map((item) => {
@@ -120,18 +120,18 @@ export function ContactClientPage() {
       </section>
 
       {/* Main Content */}
-      <section className="py-8 sm:py-10 md:py-12">
+      <section className="py-6 sm:py-8">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-3 gap-8 sm:gap-12">
+          <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Contact Form - Left Column */}
             <div className="lg:col-span-2">
-              <Badge className="mb-3 sm:mb-4 bg-accent/10 text-accent border-accent/20 text-xs sm:text-sm">
+              <Badge className="mb-2 bg-accent/10 text-accent border-accent/20 text-xs sm:text-sm">
                 Get in Touch
               </Badge>
               <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
                 Request a Quote / Business Enquiry
               </h2>
-              <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8">
+              <p className="text-sm sm:text-base text-muted-foreground mb-4">
                 Submit your requirement and our team will get back to you within
                 <strong> 30 minutes</strong> during business hours.
               </p>
@@ -139,15 +139,15 @@ export function ContactClientPage() {
             </div>
 
             {/* Contact Info - Right Column */}
-            <div className="lg:col-span-1 space-y-6">
+            <div className="lg:col-span-1 space-y-4">
               <div>
-                <Badge className="mb-3 sm:mb-4 bg-primary/10 text-primary border-primary/20 text-xs sm:text-sm">
+                <Badge className="mb-2 bg-primary/10 text-primary border-primary/20 text-xs sm:text-sm">
                   Quick Contact
                 </Badge>
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4">Contact Channels</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">Contact Channels</h3>
 
                 {/* All Contact Methods - Displayed in List */}
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {contactMethods.map((method) => {
                     const Icon = method.icon
                     return (
@@ -186,17 +186,17 @@ export function ContactClientPage() {
       </section>
 
       {/* Google Maps Section */}
-      <section className="py-8 sm:py-10 md:py-12 bg-secondary/10">
+      <section className="py-6 sm:py-8 bg-secondary/10">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-6 sm:mb-8">
-            <Badge className="mb-3 sm:mb-4 bg-primary/10 text-primary border-primary/20">Find Us</Badge>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">Visit Our Location</h2>
+          <div className="text-center mb-4 sm:mb-5">
+            <Badge className="mb-2 bg-primary/10 text-primary border-primary/20">Find Us</Badge>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-1">Visit Our Location</h2>
             <p className="text-sm sm:text-base text-muted-foreground">
               {CONTACT.BUSINESS_ADDRESS}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+          <div className="grid md:grid-cols-2 gap-5 sm:gap-6">
             {/* Google Maps Embed */}
             <Card className="overflow-hidden">
               <CardContent className="p-0">
@@ -218,8 +218,8 @@ export function ContactClientPage() {
 
             {/* Map Info Card */}
             <Card className="glass">
-              <CardContent className="p-6 flex flex-col justify-center h-full">
-                <div className="space-y-4">
+              <CardContent className="p-5 flex flex-col justify-center h-full">
+                <div className="space-y-3">
                   <div className="flex items-start gap-3">
                     <div className="p-2 bg-primary/10 rounded-lg shrink-0">
                       <MapPin className="h-5 w-5 text-primary" />

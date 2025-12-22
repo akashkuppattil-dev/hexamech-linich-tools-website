@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChevronLeft, ChevronRight, Receipt, TrendingUp, Users } from "lucide-react"
-import { useCallback, useState } from "react"
+import React, { useCallback, useState } from "react"
 
 const businessDetails = [
   {

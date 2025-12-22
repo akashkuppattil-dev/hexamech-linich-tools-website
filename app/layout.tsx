@@ -1,11 +1,12 @@
 import { Footer } from "@/components/layout/footer"
 import { Header } from "@/components/layout/header"
+import { TopInfoBar } from "@/components/layout/top-info-bar"
 import { ThemeProvider } from "@/components/theme-provider"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { CartProvider } from "@/context/cart-context"
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata, Viewport } from "next"
-import { Barlow, Inter } from "next/font/google"
+import { Barlow, Inter, Dancing_Script } from "next/font/google"
 import type React from "react"
 import "./globals.css"
 
@@ -22,6 +23,12 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
   preload: true,
+})
+
+const dance = Dancing_Script({
+  subsets: ["latin"],
+  variable: "--font-dance",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -100,12 +107,15 @@ export default function RootLayout({
           href="https://5.imimg.com/data5/SELLER/Logo/2024/11/463774909/FM/DK/XY/135087769/imtemp1727699006-120x120.jpeg"
         />
       </head>
-      <body className={`${barlow.variable} ${inter.variable} font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${barlow.variable} ${inter.variable} ${dance.variable} font-sans antialiased`} suppressHydrationWarning>
         <ThemeProvider>
           <CartProvider>
-            <Header />
-            <main className="min-h-screen mt-0 pt-4 sm:pt-5 md:pt-6 transition-all duration-300">{children}</main>
-            <Footer />
+            <div className="flex flex-col min-h-screen">
+              <TopInfoBar />
+              <Header />
+              <main className="flex-1 transition-all duration-300 bg-gray-50/30">{children}</main>
+              <Footer />
+            </div>
             <WhatsAppButton />
           </CartProvider>
         </ThemeProvider>

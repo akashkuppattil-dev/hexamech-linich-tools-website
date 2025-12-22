@@ -5,9 +5,9 @@
 
 :root {
   /* Brand Colors - Industrial Green & Red */
-  --brand-green: oklch(0.45 0.15 145);
-  --brand-green-light: oklch(0.55 0.12 145);
-  --brand-green-dark: oklch(0.35 0.15 145);
+  --brand-green: oklch(0.6 0.18 145);
+  --brand-green-light: oklch(0.7 0.15 145);
+  --brand-green-dark: oklch(0.5 0.18 145);
   --brand-red: oklch(0.55 0.22 25);
   --brand-red-light: oklch(0.65 0.18 25);
   --brand-red-dark: oklch(0.45 0.22 25);

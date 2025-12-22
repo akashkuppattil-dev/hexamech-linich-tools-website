@@ -45,10 +45,18 @@ export function ShopContent() {
 
   useEffect(() => {
     const category = searchParams.get("category")
+    const brand = searchParams.get("brand")
     const search = searchParams.get("search")
+
+    // Reset filters first
+    setSelectedCategories([])
+    setSelectedBrands([])
 
     if (category) {
       setSelectedCategories([category])
+    }
+    if (brand) {
+      setSelectedBrands([brand])
     }
     if (search) {
       // Search is handled in filtered products
@@ -290,13 +298,12 @@ export function ShopContent() {
 
           {paginatedProducts.length > 0 ? (
             <div
-              className={`grid gap-4 md:gap-6 ${
-                gridCols === 3
+              className={`grid gap-4 md:gap-6 ${gridCols === 3
                   ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
                   : gridCols === 6
                     ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
                     : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-              }`}
+                }`}
             >
               {paginatedProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { ArrowRight, MessageCircle, Shield, BadgeCheck, Truck, Award, Zap } from "lucide-react"
+import { ArrowRight, MessageCircle, Shield, BadgeCheck, Truck, Award, Zap, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function HeroSection() {
@@ -13,81 +13,88 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-[60vh] lg:min-h-[75vh] flex items-center overflow-hidden bg-white dark:bg-zinc-950">
+    <section className="relative min-h-[70vh] lg:min-h-[85vh] flex items-center overflow-hidden bg-white dark:bg-zinc-950">
       {/* Background with MINIMAL overlay for maximum clarity */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 scale-100"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 scale-100 opacity-30 dark:opacity-20"
         style={{
           backgroundImage: `url('/automotive-workshop-mechanic-tools-spray-gun-weldi.jpg')`,
         }}
       >
-        <div className="absolute inset-0 bg-white/5 dark:bg-black/10 transition-colors duration-500" />
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/30 to-transparent dark:from-zinc-950 dark:via-zinc-950/50 dark:to-transparent" />
+        <div className="absolute inset-0 bg-white/20 dark:bg-black/40 transition-colors duration-500" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10 py-10 lg:py-16">
+      <div className="container mx-auto px-4 relative z-10 py-12 lg:py-20">
         <div className="max-w-4xl">
-          {/* Tagline / Badges Row - Smaller */}
+          {/* Tagline / Badges Row */}
           <div className="flex flex-wrap items-center gap-2 mb-6">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-green-500/10 dark:bg-green-500/20 border border-green-500/20 rounded-full backdrop-blur-md">
-              <div className="w-1 h-1 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-[9px] sm:text-[10px] font-black text-green-700 dark:text-green-400 uppercase tracking-widest">GST Verified</span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg shadow-sm">
+              <CheckCircle2 className="h-3.5 w-3.5 text-red-600" />
+              <span className="text-[10px] font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-tight">B2B Wholesale Supplier</span>
             </div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-red-500/10 dark:bg-red-500/20 border border-red-500/20 rounded-full backdrop-blur-md">
-              <span className="text-[9px] sm:text-[10px] font-black text-red-700 dark:text-red-400 uppercase tracking-widest">B2B Wholesale</span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg shadow-sm">
+              <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
+              <span className="text-[10px] font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-tight">Trusted by 4,000+ Workshops</span>
             </div>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-zinc-900 dark:text-white leading-[0.95] mb-4 tracking-tighter drop-shadow-lg">
-            Industrial Grade <br />
-            <span className="text-[#4CAF50] inline-flex items-center gap-3">
-              Tools & Gear
-              <div className="hidden lg:block w-24 h-1.5 bg-[#4CAF50]/20 rounded-full overflow-hidden">
-                <div className="w-full h-full bg-[#4CAF50] origin-left animate-slide-right" />
-              </div>
-            </span>
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-zinc-900 dark:text-white leading-[1.1] mb-6 tracking-tight">
+            Professional Automotive & <br />
+            <span className="text-[#2E7D32]">Industrial Tools Supplier</span>
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg text-zinc-900 dark:text-zinc-100 mb-8 max-w-xl leading-relaxed font-bold drop-shadow-md">
-            Your trusted B2B partner for premium automotive equipment. Serving workshops, dealerships, and industrial buyers across India.
+          <p className="text-base sm:text-lg md:text-xl text-zinc-600 dark:text-zinc-400 mb-10 max-w-2xl leading-relaxed font-medium">
+            Your trusted B2B partner for premium automotive tools and equipment. Serving workshops, dealerships, and industrial buyers across India with genuine products, wholesale pricing, and expert support.
           </p>
 
-          <div className="flex flex-wrap items-center gap-3 mb-12">
-            <Link href="/shop">
+          <div className="flex flex-col sm:flex-row items-center gap-4 mb-16">
+            <Link href="/shop" className="w-full sm:w-auto">
               <Button
-                size="sm"
-                className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white px-6 h-11 text-xs font-bold flex items-center gap-2 rounded-lg transition-all shadow-lg shadow-green-900/30"
+                className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white px-8 h-14 text-sm font-black flex items-center justify-center gap-2 rounded-xl transition-all shadow-xl shadow-green-900/20 w-full sm:w-64"
               >
-                Explore Catalog
+                View Product Catalog
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <a href="https://wa.me/917510638693" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/917510638693" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
               <Button
                 variant="outline"
-                size="sm"
-                className="border-zinc-300 dark:border-zinc-700 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md text-zinc-900 dark:text-white px-6 h-11 text-xs font-bold flex items-center gap-2 rounded-lg transition-all"
+                className="border-[#2E7D32] text-[#2E7D32] hover:bg-[#2E7D32]/5 px-8 h-14 text-sm font-black flex items-center justify-center gap-2 rounded-xl transition-all w-full sm:w-64"
               >
-                <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                <MessageCircle className="h-4 w-4" />
                 Request Quote
               </Button>
             </a>
           </div>
 
-          {/* Stats Grid - Smaller */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 w-full max-w-3xl">
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 w-full pt-8 border-t border-zinc-100 dark:border-zinc-800">
             {[
-              { label: "Satisfied Customers", value: "4,000+", icon: Award, color: "text-green-500" },
-              { label: "Products", value: "1,000+", icon: BadgeCheck, color: "text-blue-500" },
-              { label: "Response", value: "24 Hours", icon: Zap, color: "text-amber-500" },
-              { label: "Registered", value: "Verified", icon: Shield, color: "text-purple-500" },
+              { label: "Satisfied Customers", value: "4,000+" },
+              { label: "Premium Products", value: "1,000+" },
+              { label: "Quote Response Time", value: "24 Hours" },
+              { label: "Fast Delivery", value: "PAN India", icon: Truck },
             ].map((stat, i) => (
-              <div key={i} className="p-3 rounded-2xl bg-white/95 dark:bg-zinc-900/95 border border-white dark:border-zinc-800 shadow-xl transition-transform hover:-translate-y-1">
-                <stat.icon className={`h-4 w-4 ${stat.color} mb-2`} />
-                <div className="text-lg sm:text-xl font-black text-zinc-900 dark:text-white mb-0.5">{stat.value}</div>
-                <div className="text-[8px] sm:text-[9px] font-black text-zinc-500 dark:text-zinc-500 uppercase tracking-widest">{stat.label}</div>
+              <div key={i} className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <div className="text-2xl sm:text-3xl font-black text-[#2E7D32]">{stat.value}</div>
+                  {stat.icon && <stat.icon className="h-5 w-5 text-red-600" />}
+                </div>
+                <div className="text-[11px] sm:text-xs font-bold text-zinc-500 dark:text-zinc-400 mt-1 uppercase tracking-tight leading-tight">{stat.label}</div>
               </div>
             ))}
+          </div>
+
+          {/* Bottom Trust Indicators */}
+          <div className="flex flex-wrap items-center gap-8 mt-12 pt-8">
+            <div className="flex items-center gap-2">
+              <Zap className="h-4 w-4 text-[#2E7D32]" />
+              <span className="text-xs font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-widest">GST Verified</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Zap className="h-4 w-4 text-[#2E7D32]" />
+              <span className="text-xs font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-widest">Genuine Products</span>
+            </div>
           </div>
         </div>
       </div>

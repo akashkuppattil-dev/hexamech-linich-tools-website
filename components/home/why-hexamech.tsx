@@ -91,15 +91,20 @@ export function WhyHexamech() {
               <ChevronLeft className="h-5 w-5" />
             </Button>
 
-            <Card className="bg-zinc-50 dark:bg-zinc-900 border-none flex-1 rounded-2xl">
-              <CardContent className="p-6 text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 mb-3">
-                  <features[currentIndex].icon className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="font-bold text-sm text-zinc-900 dark:text-white mb-2">{features[currentIndex].title}</h3>
-                <p className="text-zinc-500 dark:text-zinc-400 text-[11px] leading-relaxed">{features[currentIndex].description}</p>
-              </CardContent>
-            </Card>
+            {(() => {
+              const Icon = features[currentIndex].icon
+              return (
+                <Card className="bg-zinc-50 dark:bg-zinc-900 border-none flex-1 rounded-2xl">
+                  <CardContent className="p-6 text-center">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 mb-3">
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-bold text-sm text-zinc-900 dark:text-white mb-2">{features[currentIndex].title}</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-[11px] leading-relaxed">{features[currentIndex].description}</p>
+                  </CardContent>
+                </Card>
+              )
+            })()}
 
             <Button variant="ghost" size="icon" onClick={goToNext} className="h-10 w-10 flex-shrink-0 bg-white dark:bg-zinc-900 shadow-sm border border-zinc-100 dark:border-zinc-800 rounded-full">
               <ChevronRight className="h-5 w-5" />

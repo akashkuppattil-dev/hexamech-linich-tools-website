@@ -54,7 +54,8 @@ export function HeroSection() {
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-3 sm:mb-4">
-            Professional Automotive &<span className="text-primary block">Industrial Tools Supplier</span>
+            Automotive Workshop Infrastructure
+            <span className="text-primary block">&amp; Industrial Tools</span>
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-2xl leading-relaxed">

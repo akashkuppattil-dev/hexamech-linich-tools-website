@@ -74,15 +74,15 @@ export function BrandsSection() {
   )
 
   return (
-    <section className="py-8 md:py-10 lg:py-14 bg-gradient-to-b from-background to-secondary/10">
+    <section className="py-10 md:py-12 lg:py-14 bg-gradient-to-b from-background to-secondary/10">
       <div className="container mx-auto px-4">
         <div className="text-center mb-6 md:mb-8">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 md:mb-4">
-            Brands We Deal With
+            Trusted Global Brands We Supply
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            We partner with globally recognized brands to deliver genuine, high-performance automotive and workshop
-            solutions.
+            We partner with globally recognized manufacturers to deliver genuine, high-performance automotive and
+            industrial solutions for professional workshops.
           </p>
         </div>
 
@@ -92,7 +92,7 @@ export function BrandsSection() {
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Main Brand Partner</span>
             <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
           </div>
-          <Card className="max-w-4xl mx-auto p-6 md:p-8 bg-gradient-to-br from-primary/5 via-white to-yellow-50 dark:from-primary/10 dark:via-secondary/30 dark:to-yellow-900/10 border-2 border-primary/30 shadow-xl hover:shadow-2xl transition-all duration-300">
+          <Card className="max-w-4xl mx-auto p-6 md:p-8 bg-gradient-to-br from-primary/5 via-white to-yellow-50 dark:from-primary/10 dark:via-secondary/30 dark:to-yellow-900/10 border-2 border-primary/30 shadow-xl hover:shadow-2xl transition-all duration-200 rounded-xl">
             <div className="text-center">
               <div className="relative w-80 h-28 md:w-full md:h-32 mx-auto mb-4">
                 <Image
@@ -125,29 +125,29 @@ export function BrandsSection() {
           <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Other Trusted Brands</p>
         </div>
 
-        <div className="relative px-14 md:px-20">
+        <div className="relative px-10 md:px-16 lg:px-20">
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-1 top-1/2 -translate-y-1/2 bg-background shadow-lg z-10 hover:bg-primary hover:text-white transition-colors h-10 w-10"
+            className="absolute left-1 top-1/2 -translate-y-1/2 bg-background shadow-lg z-10 hover:bg-primary hover:text-white transition-colors h-9 w-9 md:h-10 md:w-10 rounded-full"
             onClick={prevRow}
             aria-label="Previous brands"
           >
             <ChevronLeft className="h-5 w-5" />
           </Button>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 md:gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 md:gap-5">
             {visibleBrands.map((brand, index) => (
               <Card
                 key={index}
-                className="aspect-square flex items-center justify-center p-4 md:p-5 bg-white/60 dark:bg-secondary/40 border-primary/20 hover:border-primary/60 hover:bg-white/80 dark:hover:bg-secondary/60 transition-all duration-300 hover:shadow-xl"
+                className="aspect-square flex items-center justify-center p-3 md:p-4 bg-white/70 dark:bg-secondary/40 border-primary/15 hover:border-primary/60 hover:bg-white/90 dark:hover:bg-secondary/60 transition-all duration-200 hover:shadow-lg rounded-lg"
               >
                 <div className="w-full h-full relative flex items-center justify-center overflow-hidden">
                   <Image
                     src={brand.logo || "/placeholder.svg"}
                     alt={brand.name}
                     fill
-                    className="object-contain p-2.5 md:p-3 scale-160 hover:scale-175 transition-transform duration-300"
+                    className="object-contain p-2.5 md:p-3 filter grayscale hover:grayscale-0 transition duration-200 ease-out will-change-transform hover:scale-[1.03] active:scale-[0.97]"
                     sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16vw"
                     loading="lazy"
                   />
@@ -159,7 +159,7 @@ export function BrandsSection() {
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-1 top-1/2 -translate-y-1/2 bg-background shadow-lg z-10 hover:bg-primary hover:text-white transition-colors h-10 w-10"
+            className="absolute right-1 top-1/2 -translate-y-1/2 bg-background shadow-lg z-10 hover:bg-primary hover:text-white transition-colors h-9 w-9 md:h-10 md:w-10 rounded-full"
             onClick={nextRow}
             aria-label="Next brands"
           >
